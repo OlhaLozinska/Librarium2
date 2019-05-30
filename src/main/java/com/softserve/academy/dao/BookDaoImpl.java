@@ -17,4 +17,10 @@ public class BookDaoImpl implements BookDao {
     public List<Book> getAllBooks() {
         return this.sessionFactory.getCurrentSession().createQuery("from Book").list();
     }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public Book getBookById(Integer id) {
+        return this.sessionFactory.getCurrentSession().get(Book.class, id);
+    }
 }

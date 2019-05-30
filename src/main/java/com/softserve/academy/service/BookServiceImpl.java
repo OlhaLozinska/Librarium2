@@ -20,6 +20,40 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public List<Book> getAllBooks() {
-        return bookDao.getAllBooks();
+        List<Book> books = bookDao.getAllBooks();
+        setBooksImageUrl(books);
+        return books;
+    }
+
+    @Override
+    @Transactional
+    public Book getBookById(String id) throws IllegalArgumentException {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("Book ID is not valid");
+        }
+
+        int bookId;
+        try {
+            bookId = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Book ID is not valid");
+        }
+
+        Book book = bookDao.getBookById(bookId);
+        if (book == null) {
+            throw new IllegalArgumentException("Book with that id is not found");
+        }
+
+        book.setImageUrl("photo" + book.getId());
+        return book;
+    }
+
+    private void setBooksImageUrl(final List<Book> books) {
+        if (books == null) {
+            return;
+        }
+        for (Book book : books) {
+            book.setImageUrl("photo" + book.getId());
+        }
     }
 }

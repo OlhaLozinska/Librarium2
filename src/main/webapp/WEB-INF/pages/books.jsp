@@ -4,9 +4,6 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
 
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>--%>
-
 <html>
 <head>
     <title>Books</title>
@@ -75,7 +72,7 @@
                     </div>
                     <div class="card-footer">
                         <strong>Rating: </strong><c:out value="${book.rating}"/> / 100
-                        <a href="${pageContext.request.contextPath}/book/${book.id}" style="float:right" class="btn btn-primary stretched-link">See detailed info</a>
+                        <a href="${pageContext.request.contextPath}/books/${book.id}" style="float:right" class="btn btn-primary stretched-link">See detailed info</a>
                     </div>
                 </div>
             </div>
@@ -111,34 +108,3 @@
 <jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
 </body>
 </html>
-
-<%--<html>--%>
-<%--<head>--%>
-    <%--<title>Books</title>--%>
-
-<%--</head>--%>
-<%--<body>--%>
-
-
-        <%--<c:forEach items="${books}" var="book">--%>
-            <%--<p>--%>
-                <%--${book.id} ${book.createdAt} ${book.name} ${book.description} ${book.pageQuantity}--%>
-            <%--</p>--%>
-            <%--<c:forEach items="${book.authors}" var="author">--%>
-                <%--<p>--%>
-                    <%--${author.firstName} ${author.lastName}--%>
-                <%--</p>--%>
-                <%--</c:forEach>--%>
-        <%--</c:forEach>--%>
-
-
-    <%--<c:if test="${empty books}">--%>
-
-                    <%--<h2 >There are no books ordered in that period</h2>--%>
-
-    <%--</c:if>--%>
-
-
-
-<%--</body>--%>
-<%--</html>--%>
