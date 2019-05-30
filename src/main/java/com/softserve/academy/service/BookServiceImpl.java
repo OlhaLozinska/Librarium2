@@ -112,4 +112,9 @@ public class BookServiceImpl implements BookService {
         setBookRating(orderedBooks);
         return orderedBooks;
     }
+
+    @Override
+    @Transactional
+    public int getCountBooksPublishingInPeriodOfIndependence()
+    {return bookDao.getCountBooksPublishingInPeriodOfIndependence();};
 }

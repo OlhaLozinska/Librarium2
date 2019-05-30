@@ -16,6 +16,7 @@ public class MainController {
 
     @Autowired
     private BookService bookService;
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -25,12 +26,15 @@ public class MainController {
     public String home(ModelMap map) {
         map.addAttribute("BooksQuantityInIndependencePeriod",
             bookService.getCountBooksPublishingInPeriodOfIndependence());
-        map.addAttribute("AverageReaderAge", userService.getUserStatisticAverageAge());
-        map.addAttribute("QuantityOfOrdersInAllPeriod",
-            ordersService.getQuantityOfOrdersInAllPeriod());
-        map.addAttribute("AverageTimeOfUsingLibrary",
-            userService.getUserAverageTimeOfUsingLibrary());
-        return "../index";
+        public String home (ModelMap map){
+            map.addAttribute("BooksQuantityInIndependencePeriod",
+                bookService.getCountBooksPublishingInPeriodOfIndependence());
+            map.addAttribute("AverageReaderAge", userService.getUserStatisticAverageAge());
+            map.addAttribute("QuantityOfOrdersInAllPeriod",
+                ordersService.getQuantityOfOrdersInAllPeriod());
+            map.addAttribute("AverageTimeOfUsingLibrary",
+                userService.getUserAverageTimeOfUsingLibrary());
+            return "../index";
+        }
     }
-//        request.setAttribute("AverageTimeOfUsingLibrary", USER_SERVICE.getUserAverageTimeOfUsingLibrary());
 }

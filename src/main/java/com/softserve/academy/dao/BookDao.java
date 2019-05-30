@@ -9,6 +9,7 @@ public interface BookDao {
     List<Book> getAllBooks();
 
     int getCountBooksPublishingInPeriodOfIndependence();
+
     Book getBookById(Integer id);
 
     List<Book> getAllBooksWithOrdersCount();

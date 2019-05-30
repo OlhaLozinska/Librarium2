@@ -2,6 +2,7 @@ package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Book;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
