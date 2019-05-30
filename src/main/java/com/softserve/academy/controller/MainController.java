@@ -26,11 +26,9 @@ public class MainController {
         map.addAttribute("BooksQuantityInIndependencePeriod",
             bookService.getCountBooksPublishingInPeriodOfIndependence());
         map.addAttribute("AverageReaderAge", userService.getUserStatisticAverageAge());
-//        map.addAttribute("QuantityOfOrdersInAllPeriod",
-//            OrdersService.getQuantityOfOrdersInAllPeriod());
+        map.addAttribute("QuantityOfOrdersInAllPeriod",
+            ordersService.getQuantityOfOrdersInAllPeriod());
         return "../index";
     }
-//        request.setAttribute("QuantityOfOrdersInAllPeriod", ORDERS_SERVICE.getQuantityOfOrdersInAllPeriod());
 //        request.setAttribute("AverageTimeOfUsingLibrary", USER_SERVICE.getUserAverageTimeOfUsingLibrary());
-//        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
 }
