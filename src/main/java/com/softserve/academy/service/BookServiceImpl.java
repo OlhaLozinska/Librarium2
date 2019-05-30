@@ -82,6 +82,11 @@ public class BookServiceImpl implements BookService {
         }
     }
 
+    @Override
+    @Transactional
+    public int getCountBooksPublishingInPeriodOfIndependence()
+    {return bookDao.getCountBooksPublishingInPeriodOfIndependence();};
+
 
     @Override
     @Transactional
