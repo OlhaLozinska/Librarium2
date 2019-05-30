@@ -28,6 +28,8 @@ public class MainController {
         map.addAttribute("AverageReaderAge", userService.getUserStatisticAverageAge());
         map.addAttribute("QuantityOfOrdersInAllPeriod",
             ordersService.getQuantityOfOrdersInAllPeriod());
+        map.addAttribute("AverageTimeOfUsingLibrary",
+            userService.getUserAverageTimeOfUsingLibrary());
         return "../index";
     }
 //        request.setAttribute("AverageTimeOfUsingLibrary", USER_SERVICE.getUserAverageTimeOfUsingLibrary());
