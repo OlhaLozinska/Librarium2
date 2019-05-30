@@ -23,13 +23,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public double getUserStatisticAverageAge() {
+    public int getUserStatisticAverageAge() {
         return userDao.getUserStatisticAverageAge();
     }
 
     @Override
     @Transactional
-    public double getUserAverageTimeOfUsingLibrary() {
+    public int getUserAverageTimeOfUsingLibrary() {
         return userDao.getUserAverageTimeOfUsingLibrary();
     }
 }

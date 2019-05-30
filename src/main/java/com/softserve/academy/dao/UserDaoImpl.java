@@ -20,18 +20,18 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public double getUserStatisticAverageAge() {
+    public int getUserStatisticAverageAge() {
         String hql = "select avg(year(current_date)-year(birthdayDate)) FROM User WHERE birthdayDate is not null";
         List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
-        return (Double) results.get(0);
+        return ((Double) results.get(0)).intValue();
     }
 
     @Override
-    public double getUserAverageTimeOfUsingLibrary() {
+    public int getUserAverageTimeOfUsingLibrary() {
         String hql = "select avg(((year(current_date)*365)+(month(current_date)*12)+day(current_date))" +
             "-((year(createdAt)*365)+(month(createdAt)*12)+day(createdAt))) FROM User";
         List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
-        return (Double) results.get(0);
+        return ((Double) results.get(0)).intValue();
     }
 
 }
