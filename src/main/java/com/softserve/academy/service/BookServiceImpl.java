@@ -78,4 +78,9 @@ public class BookServiceImpl implements BookService {
             book.setRating(book.getOrdersQuantity() * 100 / maxOrderCount);
         }
     }
+
+    @Override
+    @Transactional
+    public int getCountBooksPublishingInPeriodOfIndependence()
+    {return bookDao.getCountBooksPublishingInPeriodOfIndependence();};
 }

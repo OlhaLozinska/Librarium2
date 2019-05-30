@@ -1,5 +1,6 @@
 package com.softserve.academy.dao;
 
+import com.mysql.cj.Query;
 import com.softserve.academy.entity.Book;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -35,5 +37,12 @@ public class BookDaoImpl implements BookDao {
             books.add(book);
         }
         return books;
+    }
+
+    @Override
+    public int getCountBooksPublishingInPeriodOfIndependence() {
+        String hql = "select distinct book.id FROM Copy WHERE publicationYear >1991";
+        List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
+        return results.size();
     }
 }
