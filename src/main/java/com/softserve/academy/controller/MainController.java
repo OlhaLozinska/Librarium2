@@ -23,17 +23,14 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(ModelMap map) {
-            map.addAttribute("BooksQuantityInIndependencePeriod",
-                bookService.getCountBooksPublishingInPeriodOfIndependence());
-            map.addAttribute("AverageReaderAge", userService.getUserStatisticAverageAge());
-            map.addAttribute("QuantityOfOrdersInAllPeriod",
-                ordersService.getQuantityOfOrdersInAllPeriod());
-            map.addAttribute("AverageTimeOfUsingLibrary",
-                userService.getUserAverageTimeOfUsingLibrary());
-            return "../index";
-        }
+        map.addAttribute("BooksQuantityInIndependencePeriod",
+            bookService.getCountBooksPublishingInPeriodOfIndependence());
+        map.addAttribute("AverageReaderAge", userService.getUserStatisticAverageAge());
+        map.addAttribute("QuantityOfOrdersInAllPeriod",
+            ordersService.getQuantityOfOrdersInAllPeriod());
+        map.addAttribute("AverageTimeOfUsingLibrary",
+            userService.getUserAverageTimeOfUsingLibrary());
+        return "../index";
     }
-//        request.setAttribute("QuantityOfOrdersInAllPeriod", ORDERS_SERVICE.getQuantityOfOrdersInAllPeriod());
-//        request.setAttribute("AverageTimeOfUsingLibrary", USER_SERVICE.getUserAverageTimeOfUsingLibrary());
-//        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
+
 }
