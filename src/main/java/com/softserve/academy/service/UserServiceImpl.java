@@ -23,4 +23,10 @@ public class UserServiceImpl implements UserService {
         }
         return userDao.getUserById(id);
     }
+
+    @Override
+    @Transactional
+    public double getUserStatisticAverageAge() {
+        return userDao.getUserStatisticAverageAge();
+    }
 }

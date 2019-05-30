@@ -4,4 +4,6 @@ import com.softserve.academy.entity.User;
 
 public interface UserService {
     User getUserById(Integer id) throws IllegalArgumentException;
+
+    double getUserStatisticAverageAge();
 }

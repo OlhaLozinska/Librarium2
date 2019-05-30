@@ -1,6 +1,8 @@
 package com.softserve.academy.controller;
 
 import com.softserve.academy.service.BookService;
+import com.softserve.academy.service.OrdersService;
+import com.softserve.academy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,13 +16,21 @@ public class MainController {
 
     @Autowired
     private BookService bookService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private OrdersService ordersService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home(ModelMap map)
-    {
+    public String home(ModelMap map) {
         map.addAttribute("BooksQuantityInIndependencePeriod",
             bookService.getCountBooksPublishingInPeriodOfIndependence());
+        map.addAttribute("AverageReaderAge", userService.getUserStatisticAverageAge());
+//        map.addAttribute("QuantityOfOrdersInAllPeriod",
+//            OrdersService.getQuantityOfOrdersInAllPeriod());
         return "../index";
     }
-
+//        request.setAttribute("QuantityOfOrdersInAllPeriod", ORDERS_SERVICE.getQuantityOfOrdersInAllPeriod());
+//        request.setAttribute("AverageTimeOfUsingLibrary", USER_SERVICE.getUserAverageTimeOfUsingLibrary());
+//        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
 }
