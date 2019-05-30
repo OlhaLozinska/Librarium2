@@ -8,4 +8,7 @@ public interface BookService {
     List<Book> getAllBooks();
 
     Book getBookById(String id) throws IllegalArgumentException;
+
+    List<Book> getOrderedBooksInPeriod(String startDate, String endDate, String unpopularFirst)
+        throws IllegalArgumentException;
 }

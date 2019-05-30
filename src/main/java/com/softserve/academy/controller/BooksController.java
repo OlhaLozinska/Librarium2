@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -32,6 +33,24 @@ public class BooksController {
     {
         map.addAttribute("endDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         map.addAttribute("books", bookService.getAllBooks());
+        return "books";
+    }
+
+    @RequestMapping(value = "/books", method = RequestMethod.POST)
+    public String listOrderedBooks(ModelMap map, @RequestParam("startDate") String startDate,
+                                   @RequestParam("endDate") String endDate,
+                                   @RequestParam(value = "unpopularFirst", required = false) String unpopularFirst) {
+        try {
+            map.addAttribute("books", bookService.getOrderedBooksInPeriod(startDate, endDate, unpopularFirst));
+        } catch (IllegalArgumentException e) {
+            LOGGER.error(e.getMessage(), e);
+            map.addAttribute("error", e.getMessage());
+        }
+
+        map.addAttribute("startDate", startDate);
+        map.addAttribute("endDate", endDate);
+        map.addAttribute("unpopularFirst", unpopularFirst);
+
         return "books";
     }
 
