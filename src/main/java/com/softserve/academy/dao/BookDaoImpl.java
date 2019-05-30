@@ -1,16 +1,13 @@
 package com.softserve.academy.dao;
 
-import com.mysql.cj.Query;
 import com.softserve.academy.entity.Book;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -64,6 +61,11 @@ public class BookDaoImpl implements BookDao {
             books.add(book);
         }
         return books;
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
+        return this.sessionFactory.getCurrentSession().createQuery("from Book").list();
     }
 
     @Override
