@@ -16,7 +16,7 @@ public class Copy {
     @Temporal(TemporalType.DATE)
     private Date createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User creator;
 
@@ -29,14 +29,14 @@ public class Copy {
     @Column(name = "available")
     private Boolean available;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book book;
 
     @Transient
     private Integer ordersQuantity;
 
-    @OneToMany(mappedBy = "copy", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "copy", fetch = FetchType.LAZY)
     private List<Order> orders;
 
     public Copy() {

@@ -18,6 +18,12 @@ public class CopyDaoImpl implements CopyDao {
 
     @SuppressWarnings("unchecked")
     @Override
+    public Copy getCopyById(Integer id) {
+        return this.sessionFactory.getCurrentSession().get(Copy.class, id);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
     public List<Copy> getAllCopiesWithOrdersCountByBookId(Integer bookId) {
         String line = "select count(o.book), c from Copy c left join c.orders o where c.book.id = :book_id group by c.id";
         Query query = this.sessionFactory.getCurrentSession().createQuery(line);

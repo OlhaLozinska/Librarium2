@@ -17,7 +17,7 @@ public class Book {
     @Temporal(TemporalType.DATE)
     private Date createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User creator;
 
@@ -30,7 +30,7 @@ public class Book {
     @Column(name = "page_quantity")
     private Integer pageQuantity;
 
-    @ManyToMany(targetEntity = Author.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Author.class, fetch = FetchType.EAGER)
     @JoinTable(name = "bookauthor", joinColumns = {@JoinColumn(name = "book_id")},
         inverseJoinColumns = {@JoinColumn(name = "author_id")})
     private List<Author> authors;
@@ -44,10 +44,10 @@ public class Book {
     @Transient
     private Integer rating;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<Order> orders;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<Copy> copies;
 
 

@@ -1,8 +1,10 @@
 package com.softserve.academy.controller;
 
 import com.softserve.academy.entity.Book;
+import com.softserve.academy.entity.User;
 import com.softserve.academy.service.BookService;
 import com.softserve.academy.service.CopyService;
+import com.softserve.academy.service.OrderService;
 import com.softserve.academy.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -24,13 +29,14 @@ public class BooksController {
     private CopyService copyService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private OrderService orderService;
 
     private static final Logger LOGGER = Logger.getLogger(BooksController.class);
 
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public String listBooks(ModelMap map)
-    {
+    public String listBooks(ModelMap map) {
         map.addAttribute("endDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         map.addAttribute("books", bookService.getAllBooks());
         return "books";
@@ -55,8 +61,7 @@ public class BooksController {
     }
 
     @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
-    public String listBook(ModelMap map, @PathVariable String id)
-    {
+    public String listBook(ModelMap map, @PathVariable String id) {
         try {
             Book book = bookService.getBookById(id);
             map.addAttribute("book", book);
@@ -69,5 +74,26 @@ public class BooksController {
         map.addAttribute("users", userService.getAllUsers());
 
         return "book";
+    }
+
+    @RequestMapping(value = "/books/{id}", method = RequestMethod.POST)
+    public String orderBook(ModelMap map, @PathVariable String id,
+                            @RequestParam("copy_id") String copyId,
+                            @RequestParam("reader_select") String readerId,
+                            @RequestParam(value = "book_id") String bookId) {
+
+        HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+            .getRequest().getSession();
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            try {
+                boolean success = orderService.orderCopy(copyId, readerId, bookId, user);
+                LOGGER.debug("Ordering copy is successful: " + success);
+            } catch (IllegalArgumentException e) {
+                LOGGER.error(e.getMessage(), e);
+            }
+        }
+
+        return listBook(map, id);
     }
 }

@@ -16,7 +16,7 @@ public class Author {
     @Temporal(TemporalType.DATE)
     private Date createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User creator;
 
@@ -26,7 +26,7 @@ public class Author {
     @Column(name = "lastname")
     private String lastName;
 
-    @ManyToMany(targetEntity = Book.class, mappedBy = "authors", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Book.class, mappedBy = "authors", fetch = FetchType.LAZY)
     private List<Book> books;
 
     public Author() {

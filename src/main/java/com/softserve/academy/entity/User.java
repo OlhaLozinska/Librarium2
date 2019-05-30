@@ -16,7 +16,7 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User creator;
 
@@ -46,7 +46,7 @@ public class User {
     @Column(name = "user_type", length = 10)
     private UserType userType;
 
-    @OneToMany(mappedBy = "reader", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "reader", fetch = FetchType.EAGER)
     private List<Order> orders;
 
     public User() {
