@@ -4,4 +4,5 @@ import com.softserve.academy.entity.User;
 
 public interface UserDao {
     User getUserById(Integer id);
+    double getUserStatisticAverageAge();
 }
