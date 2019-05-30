@@ -66,6 +66,8 @@ public class BooksController {
             Book book = bookService.getBookById(id);
             map.addAttribute("book", book);
             map.addAttribute("copies", copyService.getAllCopiesByBook(book));
+            map.addAttribute("averageTimeOfReading",
+                bookService.getAverageTimeOfReadingByBookId(book.getId()));
         } catch (IllegalArgumentException e) {
             LOGGER.error(e.getMessage(), e);
             map.addAttribute("error", e.getMessage());

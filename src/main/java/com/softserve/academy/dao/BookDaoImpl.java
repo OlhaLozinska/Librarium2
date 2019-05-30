@@ -75,4 +75,12 @@ public class BookDaoImpl implements BookDao {
         List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
         return results.size();
     }
+
+    @Override
+    public int getAverageTimeOfReadingByBookId(int bookId) {
+        String hql = "select avg(((year(returnDate)*365)+(month(returnDate)*12)+day(returnDate))" +
+            "-((year(takeDate)*365)+(month(takeDate)*12)+day(takeDate))) from Order where id=book.id";
+        List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
+        return ((Double) results.get(0)).intValue();
+    }
 }

@@ -33,6 +33,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
+    public int getAverageTimeOfReadingByBookId(int bookId) {
+        return bookDao.getAverageTimeOfReadingByBookId(bookId);
+    }
+
+
+    @Override
+    @Transactional
     public Book getBookById(String id) throws IllegalArgumentException {
         if (id == null || id.isEmpty()) {
             throw new IllegalArgumentException("Book ID is not valid");
@@ -84,12 +91,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public int getCountBooksPublishingInPeriodOfIndependence()
-    {return bookDao.getCountBooksPublishingInPeriodOfIndependence();};
-
-
-    @Override
-    @Transactional
     public List<Book> getOrderedBooksInPeriod(String startDate, String endDate, String unpopularFirst)
         throws IllegalArgumentException {
         if ((startDate == null) || (endDate == null) ||
@@ -115,6 +116,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public int getCountBooksPublishingInPeriodOfIndependence()
-    {return bookDao.getCountBooksPublishingInPeriodOfIndependence();};
+    public int getCountBooksPublishingInPeriodOfIndependence() {
+        return bookDao.getCountBooksPublishingInPeriodOfIndependence();
+    };
 }
