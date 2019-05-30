@@ -106,7 +106,7 @@
                         <th>Orders quantity</th>
                         <th>Available</th>
 
-                        <c:if test="${not empty user}">
+                        <c:if test="${not empty sessionScope.user}">
                             <th>Order</th>
                         </c:if>
                     </tr>
@@ -119,17 +119,17 @@
                             <td><c:out value="${copy.ordersQuantity}"/></td>
                             <td><c:out value="${copy.available ? 'Yes': 'No'}"/></td>
 
-                            <c:if test="${not empty user}">
+                            <c:if test="${not empty sessionScope.user}">
                                 <td>
                                     <c:if test="${copy.available}">
-                                        <form method="post" action="${pageContext.request.contextPath}/book/${book.id}" class="needs-validation" novalidate>
+                                        <form method="post" action="${pageContext.request.contextPath}/books/${book.id}" class="needs-validation" novalidate>
                                             <input type="hidden" name="copy_id" value="${copy.id}">
                                             <input type="hidden" name="book_id" value="${book.id}">
                                             <div class="form-check-inline">
                                                 <select class="form-control form-check-input" name="reader_select" required>
                                                     <option hidden disabled selected value></option>
                                                     <c:forEach items="${users}" var="reader">
-                                                        <option value="${reader.id}"><c:out value="${reader.id} ${reader.firstname} ${reader.lastName}"/></option>
+                                                        <option value="${reader.id}"><c:out value="${reader.id} ${reader.firstName} ${reader.lastName}"/></option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
