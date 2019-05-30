@@ -16,7 +16,6 @@ public class MainController {
 
     @Autowired
     private BookService bookService;
-
     @Autowired
     private UserService userService;
     @Autowired
@@ -24,9 +23,6 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(ModelMap map) {
-        map.addAttribute("BooksQuantityInIndependencePeriod",
-            bookService.getCountBooksPublishingInPeriodOfIndependence());
-        public String home (ModelMap map){
             map.addAttribute("BooksQuantityInIndependencePeriod",
                 bookService.getCountBooksPublishingInPeriodOfIndependence());
             map.addAttribute("AverageReaderAge", userService.getUserStatisticAverageAge());

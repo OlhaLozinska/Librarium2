@@ -9,8 +9,6 @@ public interface UserService {
 
     User getUserById(Integer id) throws IllegalArgumentException;
 
-    int getUserStatisticAverageAge();
-
     int getUserAverageTimeOfUsingLibrary();
 
     User getRegisteredUser(String username, String password) throws IllegalArgumentException;
