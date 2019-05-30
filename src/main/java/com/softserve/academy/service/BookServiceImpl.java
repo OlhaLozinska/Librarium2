@@ -22,4 +22,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> getAllBooks() {
         return bookDao.getAllBooks();
     }
+
+    @Override
+    @Transactional
+    public int getCountBooksPublishingInPeriodOfIndependence()
+    {return bookDao.getCountBooksPublishingInPeriodOfIndependence();};
 }
