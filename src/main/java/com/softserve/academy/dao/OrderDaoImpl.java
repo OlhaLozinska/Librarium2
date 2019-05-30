@@ -6,6 +6,9 @@ import com.softserve.academy.entity.Order;
 import com.softserve.academy.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,4 +61,11 @@ public class OrderDaoImpl implements OrderDao {
 
         return true;
     }
+    @Override
+    public int getQuantityOfOrdersInAllPeriod() {
+        String hql = "select id FROM Order";
+        List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
+        return results.size();
+    }
+
 }
