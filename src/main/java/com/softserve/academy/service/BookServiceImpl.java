@@ -18,10 +18,6 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private OrderDao orderDao;
 
-    public void setBookDao(BookDao bookDao) {
-        this.bookDao = bookDao;
-    }
-    public void setOrderDao(OrderDao orderDao) { this.orderDao = orderDao; }
 
     @Override
     @Transactional

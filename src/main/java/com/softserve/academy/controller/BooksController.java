@@ -1,6 +1,8 @@
 package com.softserve.academy.controller;
 
+import com.softserve.academy.entity.Book;
 import com.softserve.academy.service.BookService;
+import com.softserve.academy.service.CopyService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +18,11 @@ import java.text.SimpleDateFormat;
 public class BooksController {
     @Autowired
     private BookService bookService;
-
-    public void setBookService(BookService bookService) {
-        this.bookService = bookService;
-    }
+    @Autowired
+    private CopyService copyService;
 
     private static final Logger LOGGER = Logger.getLogger(BooksController.class);
+
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public String listBooks(ModelMap map)
@@ -35,9 +36,12 @@ public class BooksController {
     public String listBook(ModelMap map, @PathVariable String id)
     {
         try {
-            map.addAttribute("book", bookService.getBookById(id));
+            Book book = bookService.getBookById(id);
+            map.addAttribute("book", book);
+            map.addAttribute("copies", copyService.getAllCopiesByBook(book));
         } catch (IllegalArgumentException e) {
             LOGGER.error(e.getMessage(), e);
+            map.addAttribute("error", e.getMessage());
         }
 
         return "book";

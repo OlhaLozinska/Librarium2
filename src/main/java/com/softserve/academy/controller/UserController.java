@@ -15,9 +15,6 @@ public class UserController {
     private UserService userService;
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String listUser(ModelMap map)
