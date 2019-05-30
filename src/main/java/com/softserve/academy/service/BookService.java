@@ -10,4 +10,6 @@ public interface BookService {
     int getCountBooksPublishingInPeriodOfIndependence();
 
     Book getBookById(String id) throws IllegalArgumentException;
+
+    int getAverageTimeOfReadingByBookId(int bookId);
 }

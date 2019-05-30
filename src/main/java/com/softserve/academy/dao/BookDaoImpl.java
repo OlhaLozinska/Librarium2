@@ -28,9 +28,9 @@ public class BookDaoImpl implements BookDao {
         Iterator iter = this.sessionFactory.getCurrentSession().createQuery(line).list().iterator();
         List<Book> books = new ArrayList<>();
         while (iter.hasNext()) {
-            Object[] tuple = (Object[])iter.next();
+            Object[] tuple = (Object[]) iter.next();
             Book book = (Book) tuple[1];
-            book.setOrdersQuantity(((Long)tuple[0]).intValue());
+            book.setOrdersQuantity(((Long) tuple[0]).intValue());
             books.add(book);
         }
         return books;
@@ -46,5 +46,13 @@ public class BookDaoImpl implements BookDao {
         String hql = "select distinct book.id FROM Copy WHERE publicationYear >1991";
         List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
         return results.size();
+    }
+
+    @Override
+    public int getAverageTimeOfReadingByBookId(int bookId) {
+        String hql = "select avg(((year(returnDate)*365)+(month(returnDate)*12)+day(returnDate))" +
+            "-((year(takeDate)*365)+(month(takeDate)*12)+day(takeDate))) from Order where id=book.id";
+        List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
+        return ((Double) results.get(0)).intValue();
     }
 }
