@@ -33,4 +33,7 @@ public class MainController {
             return "../index";
         }
     }
+//        request.setAttribute("QuantityOfOrdersInAllPeriod", ORDERS_SERVICE.getQuantityOfOrdersInAllPeriod());
+//        request.setAttribute("AverageTimeOfUsingLibrary", USER_SERVICE.getUserAverageTimeOfUsingLibrary());
+//        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
 }
