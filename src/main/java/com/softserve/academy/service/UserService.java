@@ -9,5 +9,7 @@ public interface UserService {
 
     User getUserById(Integer id) throws IllegalArgumentException;
 
+    double getUserStatisticAverageAge();
+
     User getRegisteredUser(String username, String password) throws IllegalArgumentException;
 }

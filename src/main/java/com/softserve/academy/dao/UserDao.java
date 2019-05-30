@@ -8,6 +8,7 @@ public interface UserDao {
     List<User> getAllUsers();
 
     User getUserById(Integer id);
+    double getUserStatisticAverageAge();
 
     User getUserByUsername(String userName);
 }

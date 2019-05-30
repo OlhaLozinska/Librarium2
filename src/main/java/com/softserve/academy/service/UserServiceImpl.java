@@ -31,6 +31,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public double getUserStatisticAverageAge() {
+        return userDao.getUserStatisticAverageAge();
+    }
+
+    @Override
+    @Transactional
     public User getRegisteredUser(String username, String password) throws IllegalArgumentException {
         if ((username == null) || (password == null) ||
             (username.isEmpty()) || (password.isEmpty())) {
