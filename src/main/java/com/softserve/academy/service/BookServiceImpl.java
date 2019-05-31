@@ -97,7 +97,7 @@ public class BookServiceImpl implements BookService {
         try {
             DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             orderedBooks = bookDao.getOrderedListOfBooksInPeriod(formatter.parse(startDate),
-                    formatter.parse(endDate), sortAsc);
+                formatter.parse(endDate), sortAsc);
         } catch (ParseException e) {
             LOGGER.error(e.getMessage(), e);
             throw new IllegalArgumentException("Date is not valid");

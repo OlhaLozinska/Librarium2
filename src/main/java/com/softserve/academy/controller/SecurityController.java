@@ -22,7 +22,7 @@ public class SecurityController {
     private static final Logger LOGGER = Logger.getLogger(SecurityController.class);
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(ModelMap map)
+    public String logout()
     {
         ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
             .getRequest().getSession().invalidate();

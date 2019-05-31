@@ -72,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             orderDao.orderCopy(creator, reader, book, copy, deadlineDate);
         } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
             return false;
         }
 

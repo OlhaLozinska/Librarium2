@@ -91,6 +91,7 @@ public class BooksController {
                 LOGGER.debug("Ordering copy is successful: " + success);
             } catch (IllegalArgumentException e) {
                 LOGGER.error(e.getMessage(), e);
+                map.addAttribute("error", e.getMessage());
             }
         }
 

@@ -30,9 +30,9 @@ public class BookDaoImpl implements BookDao {
         Iterator iter = this.sessionFactory.getCurrentSession().createQuery(line).list().iterator();
         List<Book> books = new ArrayList<>();
         while (iter.hasNext()) {
-            Object[] tuple = (Object[])iter.next();
+            Object[] tuple = (Object[]) iter.next();
             Book book = (Book) tuple[1];
-            book.setOrdersQuantity(((Long)tuple[0]).intValue());
+            book.setOrdersQuantity(((Long) tuple[0]).intValue());
             books.add(book);
         }
         return books;
@@ -56,9 +56,9 @@ public class BookDaoImpl implements BookDao {
         Iterator iter = query.list().iterator();
         List<Book> books = new ArrayList<>();
         while (iter.hasNext()) {
-            Object[] tuple = (Object[])iter.next();
+            Object[] tuple = (Object[]) iter.next();
             Book book = (Book) tuple[1];
-            book.setOrdersQuantity(((Long)tuple[0]).intValue());
+            book.setOrdersQuantity(((Long) tuple[0]).intValue());
             books.add(book);
         }
         return books;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import org.hibernate.query.Query;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,9 +32,9 @@ public class CopyDaoImpl implements CopyDao {
         Iterator iter = query.list().iterator();
         List<Copy> copies = new ArrayList<>();
         while (iter.hasNext()) {
-            Object[] tuple = (Object[])iter.next();
+            Object[] tuple = (Object[]) iter.next();
             Copy copy = (Copy) tuple[1];
-            copy.setOrdersQuantity(((Long)tuple[0]).intValue());
+            copy.setOrdersQuantity(((Long) tuple[0]).intValue());
             copies.add(copy);
         }
         return copies;
