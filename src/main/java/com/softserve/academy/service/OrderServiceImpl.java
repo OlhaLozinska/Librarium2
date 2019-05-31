@@ -40,6 +40,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
+    public int getQuantityOfOrdersInAllPeriod() {
+        return orderDao.getQuantityOfOrdersInAllPeriod();
+    }
+
+
+    @Override
+    @Transactional
     public boolean orderCopy(String copyId, String readerId, String bookId, User creator)
         throws IllegalArgumentException {
         if ((copyId == null) || (readerId == null) || (bookId == null) ||
