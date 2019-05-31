@@ -1,16 +1,11 @@
 package com.softserve.academy.controller;
 
-import com.softserve.academy.entity.Book;
 import com.softserve.academy.entity.User;
-import com.softserve.academy.service.BookService;
-import com.softserve.academy.service.CopyService;
-import com.softserve.academy.service.OrderService;
 import com.softserve.academy.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,8 +26,8 @@ public class SecurityController {
     {
         ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
             .getRequest().getSession().invalidate();
-        // TODO redirect to main controller to home page
-        return "../index";
+
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -47,7 +42,6 @@ public class SecurityController {
             LOGGER.error(e.getMessage(), e);
         }
 
-        // TODO redirect to main controller to home page
-        return "../index";
+        return "redirect:/";
     }
 }
