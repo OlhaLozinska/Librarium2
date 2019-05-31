@@ -27,12 +27,6 @@ public class UserDaoImpl implements UserDao {
         return this.sessionFactory.getCurrentSession().get(User.class, id);
     }
 
-    @Override
-    public double getUserStatisticAverageAge() {
-        String hql = "select avg(year(current_date)-year(birthdayDate)) FROM User WHERE birthdayDate is not null";
-        List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
-        return (Double) results.get(0);
-    }
 
     @Override
     public int getUserStatisticAverageAge() {
