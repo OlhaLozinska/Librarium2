@@ -69,6 +69,12 @@ public class OrderServiceImpl implements OrderService {
         }
 
 
-        return orderDao.orderCopy(creator, reader, book, copy, deadlineDate);
+        try {
+            orderDao.orderCopy(creator, reader, book, copy, deadlineDate);
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
     }
 }

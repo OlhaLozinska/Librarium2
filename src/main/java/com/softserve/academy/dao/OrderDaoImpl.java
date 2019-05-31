@@ -2,6 +2,7 @@ package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Book;
 import com.softserve.academy.entity.Copy;
+import com.softserve.academy.entity.Order;
 import com.softserve.academy.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -39,37 +40,22 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public boolean orderCopy(User creator, User reader, Book book, Copy copy, Date deadlineDate) {
         Session session = this.sessionFactory.getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        String line = "insert into Order (creator, reader, book, copy, deadlineDate) " +
-            "values (:creator, :reader, :book, :copy, :deadlineDate)";
-        Query query  = session.createQuery(line);
-        query.setParameter("creator", creator);
-        query.setParameter("reader", reader);
-        query.setParameter("book", book);
-        query.setParameter("copy", copy);
-        query.setParameter("deadlineDate", deadlineDate);
-        int rowsAffected = query.executeUpdate();
 
-        if (rowsAffected == 0) {
-            tx.rollback();
-            session.close();
-            return false;
-        }
+        Date nowDate = new Date();
+        Order order = new Order();
+        order.setCreatedAt(nowDate);
+        order.setCreator(creator);
+        order.setReader(reader);
+        order.setBook(book);
+        order.setCopy(copy);
+        order.setTakeDate(nowDate);
+        order.setDeadlineDate(deadlineDate);
 
-        String newLine = "update Copy set available = :available where id = :copyId";
-        Query newQuery = session.createQuery(newLine);
-        newQuery.setParameter("available", true);
-        newQuery.setParameter("copyId", copy.getId());
-        rowsAffected = newQuery.executeUpdate();
+        session.save(order);
 
-        if (rowsAffected == 0) {
-            tx.rollback();
-            session.close();
-            return false;
-        } else {
-            tx.commit();
-            session.close();
-            return true;
-        }
+        copy.setAvailable(false);
+        session.update(copy);
+
+        return true;
     }
 }

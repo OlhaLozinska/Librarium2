@@ -9,7 +9,7 @@ import java.util.List;
 public class User {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "created_at")
@@ -46,7 +46,7 @@ public class User {
     @Column(name = "user_type", length = 10)
     private UserType userType;
 
-    @OneToMany(mappedBy = "reader", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "reader", fetch = FetchType.LAZY)
     private List<Order> orders;
 
     public User() {
