@@ -34,4 +34,20 @@ public class SecurityController {
         // TODO redirect to main controller to home page
         return "../index";
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login(@RequestParam("uname") String username,
+                            @RequestParam("pwd") String password) {
+        try {
+            User user = userService.getRegisteredUser(username, password);
+            HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+                .getRequest().getSession();
+            session.setAttribute("user", user);
+        } catch (IllegalArgumentException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+
+        // TODO redirect to main controller to home page
+        return "../index";
+    }
 }
