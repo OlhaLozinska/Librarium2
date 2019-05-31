@@ -6,8 +6,14 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.service;
 
-public interface AuthorService {
+import com.softserve.academy.entity.User;
 
+public interface OrderService {
+    boolean orderCopy(String copyId, String readerId, String bookId, User creator)
+        throws IllegalArgumentException;
+
+    int getQuantityOfOrdersInAllPeriod();
 }

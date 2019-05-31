@@ -1,3 +1,12 @@
+/*
+ * This is a simple web application utilizing Spring MVC and Hibernate.
+ * Developed by Lv-409.Java group of Softserve Academy.
+ *
+ * Copyright (c) 1993-2019 Softserve, Inc.
+ * This software is the confidential and proprietary information of Softserve.
+ *
+ */
+
 package com.softserve.academy.controller;
 
 import com.softserve.academy.service.UserService;
@@ -15,13 +24,9 @@ public class UserController {
     private UserService userService;
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public String listUser(ModelMap map)
-    {
+    public String listUser(ModelMap map) {
         try {
             map.addAttribute("user", userService.getUserById(5));
         } catch (IllegalArgumentException e) {

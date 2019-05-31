@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <div id="footer">
-        <div style="text-align: center; background-color: black;
+        <div style="text-align: center; position: fixed; bottom: 0; width: 100%; height: 40px; background-color: black;
   color: white; padding: 10px;">
             <p>SoftServe 2019</p>
         </div>

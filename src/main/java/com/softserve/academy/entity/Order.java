@@ -1,3 +1,11 @@
+/*
+ * This is a simple web application utilizing Spring MVC and Hibernate.
+ * Developed by Lv-409.Java group of Softserve Academy.
+ *
+ * Copyright (c) 1993-2019 Softserve, Inc.
+ * This software is the confidential and proprietary information of Softserve.
+ *
+ */
 package com.softserve.academy.entity;
 
 import javax.persistence.*;
@@ -8,26 +16,26 @@ import java.util.Date;
 public class Order {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "created_at")
     @Temporal(TemporalType.DATE)
     private Date createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User creator;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reader_id", referencedColumnName = "id")
     private User reader;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id", referencedColumnName = "id")
     private Book book;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "copy_id", referencedColumnName = "id")
     private Copy copy;
 

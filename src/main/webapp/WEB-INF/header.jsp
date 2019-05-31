@@ -27,7 +27,7 @@
                 <c:if test="${not empty sessionScope.user}">
                     <a href="${pageContext.request.contextPath}/logout" class="w3-bar-item w3-button w3-right w3-hide-small w3-hover-white">Logout</a>
                     <a class="w3-bar-item w3-right w3-hide-small">
-                        <c:out value="${sessionScope.user.userName}"/> - <c:out value="${sessionScope.user.contact_type_id.name}"/>
+                        <c:out value="${sessionScope.user.userName}"/> - <c:out value="${sessionScope.user.userType}"/>
                     </a>
                 </c:if>
 

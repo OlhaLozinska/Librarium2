@@ -1,3 +1,11 @@
+/*
+ * This is a simple web application utilizing Spring MVC and Hibernate.
+ * Developed by Lv-409.Java group of Softserve Academy.
+ *
+ * Copyright (c) 1993-2019 Softserve, Inc.
+ * This software is the confidential and proprietary information of Softserve.
+ *
+ */
 package com.softserve.academy.entity;
 
 import javax.persistence.*;
@@ -9,14 +17,14 @@ import java.util.List;
 public class Author {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "created_at")
     @Temporal(TemporalType.DATE)
     private Date createdAt;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User creator;
 
@@ -26,7 +34,7 @@ public class Author {
     @Column(name = "lastname")
     private String lastName;
 
-    @ManyToMany(targetEntity = Book.class, mappedBy = "authors", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Book.class, mappedBy = "authors", fetch = FetchType.LAZY)
     private List<Book> books;
 
     public Author() {
