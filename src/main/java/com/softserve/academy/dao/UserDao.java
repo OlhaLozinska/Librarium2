@@ -11,4 +11,6 @@ public interface UserDao {
     int getUserStatisticAverageAge();
     int getUserAverageTimeOfUsingLibrary();
     User getUserByUsername(String userName);
+
+    int getUserAverageAgeByBookId(int bookId);
 }
