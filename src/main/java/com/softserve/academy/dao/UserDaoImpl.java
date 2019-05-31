@@ -1,5 +1,6 @@
 package com.softserve.academy.dao;
 
+import com.softserve.academy.entity.Author;
 import com.softserve.academy.entity.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -73,4 +74,20 @@ public class UserDaoImpl implements UserDao {
         return ((Double) results.get(0)).intValue();
     }
 
+    @Override
+    public int getUserAverageAgeByAuthor(Author author) {
+        String hql = "select u from Author a left join a.books b " +
+            "inner join b.orders o left join o.reader u where a.id=:authorId";
+        Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+        query.setParameter("authorId", author.getId());
+        List results = query.list();
+        Date date = new Date();
+        int counter = 0;
+        for (int i = 0; i < results.size(); i++) {
+            User user = (User) results.get(i);
+            System.out.println(user.getFirstName());
+            counter += (date.getYear() - user.getBirthdayDate().getYear());
+        }
+        return counter / results.size();
+    }
 }

@@ -1,5 +1,6 @@
 package com.softserve.academy.dao;
 
+import com.softserve.academy.entity.Author;
 import com.softserve.academy.entity.User;
 
 import java.util.List;
@@ -13,4 +14,8 @@ public interface UserDao {
     User getUserByUsername(String userName);
 
     int getUserAverageAgeByBookId(int bookId);
+
+    int getUserAverageAgeByAuthor(Author author);
+
+
 }
