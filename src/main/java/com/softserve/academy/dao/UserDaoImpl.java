@@ -6,6 +6,7 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Author;
@@ -18,8 +19,19 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Class which provide default implementation of CRUD operations.
+ *
+ * @author Olha Lozinska
+ * @author Volodymyr Oseredchuk
+ * @version 1.0
+ * @since 23.05.2019
+ */
 @Repository
 public class UserDaoImpl implements UserDao {
+    /**
+     * SessionFactory objcet
+     */
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -29,13 +41,23 @@ public class UserDaoImpl implements UserDao {
         return this.sessionFactory.getCurrentSession().createQuery("from User").list();
     }
 
+    /**
+     * Finds user by ID.
+     *
+     * @param id user ID.
+     * @return user.
+     */
     @SuppressWarnings("unchecked")
     @Override
     public User getUserById(Integer id) {
         return this.sessionFactory.getCurrentSession().get(User.class, id);
     }
 
-
+    /**
+     * Finds user statistic average age.
+     *
+     * @return number of years.
+     */
     @Override
     public int getUserStatisticAverageAge() {
         String hql = "select avg(year(current_date)-year(birthdayDate)) FROM User WHERE birthdayDate is not null";
@@ -43,6 +65,12 @@ public class UserDaoImpl implements UserDao {
         return ((Double) results.get(0)).intValue();
     }
 
+    /**
+     * Finds user by username.
+     *
+     * @param userName username.
+     * @return user.
+     */
     @SuppressWarnings("unchecked")
     @Override
     public User getUserByUsername(String userName) {
@@ -57,6 +85,12 @@ public class UserDaoImpl implements UserDao {
             return (User) users.get(0);
         }
     }
+
+    /**
+     * Finds user average time of using library.
+     *
+     * @return number of days.
+     */
     @Override
     public int getUserAverageTimeOfUsingLibrary() {
         String hql = "select avg(((year(current_date)*365)+(month(current_date)*12)+day(current_date))" +
@@ -65,6 +99,12 @@ public class UserDaoImpl implements UserDao {
         return ((Double) results.get(0)).intValue();
     }
 
+    /**
+     * Finds user average age by book ID.
+     *
+     * @param bookId book ID.
+     * @return number of years.
+     */
     @Override
     public int getUserAverageAgeByBookId(int bookId) {
         String hql = "select (avg(((year(current_date)*365)+(month(current_date)*12)+day(current_date))" +
@@ -76,6 +116,12 @@ public class UserDaoImpl implements UserDao {
         return ((Double) results.get(0)).intValue();
     }
 
+    /**
+     * Finds user average age by author.
+     *
+     * @param author author.
+     * @return number of years.
+     */
     @Override
     public int getUserAverageAgeByAuthor(Author author) {
         String hql = "select u from Author a left join a.books b " +

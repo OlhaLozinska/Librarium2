@@ -6,7 +6,6 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
-
 package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Book;
@@ -23,12 +22,28 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Class which provide default implementation of CRUD operations.
+ *
+ * @author Olha Lozinska
+ * @author Volodymyr Oseredchuk
+ * @version 1.0
+ * @since 23.05.2019
+ */
 @Repository
 public class OrderDaoImpl implements OrderDao {
+    /**
+     * SessionFactory objcet
+     */
     @Autowired
     private SessionFactory sessionFactory;
 
-
+    /**
+     * Finds orders count by book ID.
+     *
+     * @param bookId book ID.
+     * @return number of orders.
+     */
     @Override
     public Integer getOrdersCountByBookId(Integer bookId) {
         String line = "select count(book) from Order where book.id = :bookId";
@@ -38,6 +53,11 @@ public class OrderDaoImpl implements OrderDao {
         return count.intValue();
     }
 
+    /**
+     * Finds maximum orders count.
+     *
+     * @return maximum orders count.
+     */
     @Override
     public Integer getMaxOrdersCount() {
         String line = "select count(book) from Order group by book";
@@ -45,6 +65,16 @@ public class OrderDaoImpl implements OrderDao {
         return ((Long) Collections.max(ordersCount)).intValue();
     }
 
+    /**
+     * Finds orders count by book ID.
+     *
+     * @param creator      user, which created the record.
+     * @param reader       user.
+     * @param book         book.
+     * @param copy         copy.
+     * @param deadlineDate the end date for the expected return of the  book.
+     * @return condition.
+     */
     @Override
     public boolean orderCopy(User creator, User reader, Book book, Copy copy, Date deadlineDate) {
         Session session = this.sessionFactory.getCurrentSession();
@@ -67,6 +97,11 @@ public class OrderDaoImpl implements OrderDao {
         return true;
     }
 
+    /**
+     * Finds quantity of orders in all period.
+     *
+     * @return quantity of orders.
+     */
     @Override
     public int getQuantityOfOrdersInAllPeriod() {
         String hql = "select id FROM Order";

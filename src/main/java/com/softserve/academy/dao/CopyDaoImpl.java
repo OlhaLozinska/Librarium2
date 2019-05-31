@@ -19,9 +19,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Class which provide default implementation of CRUD operations.
+ *
+ * @author Olha Lozinska
+ * @author Volodymyr Oseredchuk
+ * @version 1.0
+ * @since 23.05.2019
+ */
 @Repository
 public class CopyDaoImpl implements CopyDao {
-
+    /** SessionFactory objcet */
     @Autowired
     private SessionFactory sessionFactory;
 
