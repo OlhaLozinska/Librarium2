@@ -1,3 +1,12 @@
+/*
+ * This is a simple web application utilizing Spring MVC and Hibernate.
+ * Developed by Lv-409.Java group of Softserve Academy.
+ *
+ * Copyright (c) 1993-2019 Softserve, Inc.
+ * This software is the confidential and proprietary information of Softserve.
+ *
+ */
+
 package com.softserve.academy.controller;
 
 import com.softserve.academy.entity.User;
@@ -22,8 +31,7 @@ public class SecurityController {
     private static final Logger LOGGER = Logger.getLogger(SecurityController.class);
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout()
-    {
+    public String logout() {
         ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
             .getRequest().getSession().invalidate();
 
@@ -32,7 +40,7 @@ public class SecurityController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("uname") String username,
-                            @RequestParam("pwd") String password) {
+                        @RequestParam("pwd") String password) {
         try {
             User user = userService.getRegisteredUser(username, password);
             HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())

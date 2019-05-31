@@ -1,3 +1,11 @@
+/*
+ * This is a simple web application utilizing Spring MVC and Hibernate.
+ * Developed by Lv-409.Java group of Softserve Academy.
+ *
+ * Copyright (c) 1993-2019 Softserve, Inc.
+ * This software is the confidential and proprietary information of Softserve.
+ *
+ */
 package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Book;
@@ -6,10 +14,6 @@ import com.softserve.academy.entity.Order;
 import com.softserve.academy.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
