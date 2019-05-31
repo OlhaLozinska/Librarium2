@@ -3,6 +3,7 @@ package com.softserve.academy.controller;
 import com.softserve.academy.entity.Book;
 import com.softserve.academy.service.BookService;
 import com.softserve.academy.service.CopyService;
+import com.softserve.academy.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class BooksController {
     private BookService bookService;
     @Autowired
     private CopyService copyService;
+    @Autowired
+    private UserService userService;
 
     private static final Logger LOGGER = Logger.getLogger(BooksController.class);
 
@@ -41,6 +44,8 @@ public class BooksController {
             map.addAttribute("copies", copyService.getAllCopiesByBook(book));
             map.addAttribute("averageTimeOfReading",
                 bookService.getAverageTimeOfReadingByBookId(book.getId()));
+            map.addAttribute("averageUserAgeByBook",
+                userService.getUserAverageAgeByBookId(book.getId()));
         } catch (IllegalArgumentException e) {
             LOGGER.error(e.getMessage(), e);
             map.addAttribute("error", e.getMessage());

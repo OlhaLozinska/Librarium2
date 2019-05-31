@@ -34,5 +34,15 @@ public class UserDaoImpl implements UserDao {
         return ((Double) results.get(0)).intValue();
     }
 
-}
+    @Override
+    public int getUserAverageAgeByBookId(int bookId) {
+        String hql = "select (avg(((year(current_date)*365)+(month(current_date)*12)+day(current_date))" +
+            "-((year(U.birthdayDate)*365)+(month(U.birthdayDate)*12)+day(U.birthdayDate))))/365 " +
+            "from  Order As O left join User AS U On U.id = O.reader.id and O.book.id=:bookId";
 
+        List results = this.sessionFactory.getCurrentSession().createQuery(hql).setParameter("bookId", bookId).list();
+
+        return ((Double) results.get(0)).intValue();
+    }
+
+}
