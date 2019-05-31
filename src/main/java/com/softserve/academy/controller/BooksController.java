@@ -46,6 +46,8 @@ public class BooksController {
                 bookService.getAverageTimeOfReadingByBookId(book.getId()));
             map.addAttribute("averageUserAgeByBook",
                 userService.getUserAverageAgeByBookId(book.getId()));
+            map.addAttribute("averageUserAgesForAuthors",
+                userService.getUsersAverageAgesForAuthors(book.getAuthors()));
         } catch (IllegalArgumentException e) {
             LOGGER.error(e.getMessage(), e);
             map.addAttribute("error", e.getMessage());
