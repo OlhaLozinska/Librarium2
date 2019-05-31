@@ -28,4 +28,22 @@ public class UserServiceImpl implements UserService {
         }
         return userDao.getUserById(id);
     }
+
+    @Override
+    @Transactional
+    public User getRegisteredUser(String username, String password) throws IllegalArgumentException {
+        if ((username == null) || (password == null) ||
+            (username.isEmpty()) || (password.isEmpty())) {
+            throw new IllegalArgumentException("User credentials is empty");
+        }
+        User user = userDao.getUserByUsername(username);
+        if (user == null) {
+            throw new IllegalArgumentException("User with that username is not found");
+        }
+        if (user.getPassword().equals(password)) {
+            return user;
+        } else {
+            throw new IllegalArgumentException("Password is not valid");
+        }
+    }
 }

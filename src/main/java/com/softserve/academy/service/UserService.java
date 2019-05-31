@@ -8,4 +8,6 @@ public interface UserService {
     List<User> getAllUsers();
 
     User getUserById(Integer id) throws IllegalArgumentException;
+
+    User getRegisteredUser(String username, String password) throws IllegalArgumentException;
 }
