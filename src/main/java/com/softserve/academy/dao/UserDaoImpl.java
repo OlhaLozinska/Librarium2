@@ -87,7 +87,6 @@ public class UserDaoImpl implements UserDao {
         int counter = 0;
         for (int i = 0; i < results.size(); i++) {
             User user = (User) results.get(i);
-            System.out.println(user.getFirstName());
             counter += (date.getYear() - user.getBirthdayDate().getYear());
         }
         return counter / results.size();

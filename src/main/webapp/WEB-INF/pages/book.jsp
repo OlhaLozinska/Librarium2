@@ -95,7 +95,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="margin-bottom: 40px;">
             <div class = "col-md-12 d-flex" >
 
                 <table class="table table-striped table-bordered table-hover">
@@ -150,7 +150,7 @@
     </div>
 </c:if>
 <c:if test="${not empty error}">
-    <h2><c:out value="${error}"/></h2>
+    <h2 style="margin-top: 50px;"><c:out value="${error}"/></h2>
     <a href="${pageContext.request.contextPath}/books" class="btn btn-primary">Go back</a>
 </c:if>
 
