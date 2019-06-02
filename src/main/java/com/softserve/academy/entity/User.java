@@ -12,6 +12,15 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+/**
+ *
+ * Entity class, represents user.
+ *
+ * @author Andrii Dobrianskyi
+ * @version 2.0
+ * @since 23.05.2019
+ *
+ */
 @Entity
 @Table(name = "users")
 public class User {
@@ -57,6 +66,9 @@ public class User {
     @OneToMany(mappedBy = "reader", fetch = FetchType.LAZY)
     private List<Order> orders;
 
+    /**
+     * Default no-args constructor
+     */
     public User() {
     }
 
@@ -156,6 +168,12 @@ public class User {
         this.orders = orders;
     }
 
+    /**
+     * Checks two User objects for equality.
+     *
+     * @param o user
+     * @return true or false.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -203,6 +221,11 @@ public class User {
         return orders != null ? orders.equals(user.orders) : user.orders == null;
     }
 
+    /**
+     * Calculates hashCode for User object.
+     *
+     * @return user's hashCode.
+     */
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
@@ -220,6 +243,11 @@ public class User {
         return result;
     }
 
+    /**
+     * Forms string representation of User object.
+     *
+     * @return string representation of User object.
+     */
     @Override
     public String toString() {
         return "User{" +

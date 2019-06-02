@@ -13,6 +13,15 @@ import java.util.List;
 
 import javax.persistence.*;
 
+/**
+ *
+ * Entity class, represents library book.
+ *
+ * @author Volodymyr Oseredchuk
+ * @version 2.0
+ * @since 23.05.2019
+ *
+ */
 @Entity
 @Table(name = "books")
 public class Book {
@@ -58,7 +67,9 @@ public class Book {
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<Copy> copies;
 
-
+    /**
+     * Default no-args constructor
+     */
     public Book() {
     }
 
@@ -158,6 +169,12 @@ public class Book {
         this.copies = copies;
     }
 
+    /**
+     * Checks two Book objects for equality.
+     *
+     * @param o book
+     * @return true or false.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -205,6 +222,11 @@ public class Book {
         return copies != null ? copies.equals(book.copies) : book.copies == null;
     }
 
+    /**
+     * Calculates hashCode for Book object.
+     *
+     * @return book's hashCode.
+     */
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
@@ -222,6 +244,11 @@ public class Book {
         return result;
     }
 
+    /**
+     * Forms string representation of Book object.
+     *
+     * @return string representation of Book object.
+     */
     @Override
     public String toString() {
         return "Book{" +
