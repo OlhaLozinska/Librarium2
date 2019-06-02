@@ -123,10 +123,10 @@
                                 <td>
                                     <c:if test="${copy.available}">
                                         <form method="post" action="${pageContext.request.contextPath}/books/${book.id}" class="needs-validation" novalidate>
-                                            <input type="hidden" name="copy_id" value="${copy.id}">
-                                            <input type="hidden" name="book_id" value="${book.id}">
+                                            <input type="hidden" name="copyId" value="${copy.id}">
+                                            <input type="hidden" name="bookId" value="${book.id}">
                                             <div class="form-check-inline">
-                                                <select class="form-control form-check-input" name="reader_select" required>
+                                                <select class="form-control form-check-input" name="readerId" required>
                                                     <option hidden disabled selected value></option>
                                                     <c:forEach items="${users}" var="reader">
                                                         <option value="${reader.id}"><c:out value="${reader.id} ${reader.firstName} ${reader.lastName}"/></option>

@@ -34,9 +34,9 @@ public class CopyDaoImpl implements CopyDao {
     @SuppressWarnings("unchecked")
     @Override
     public List<Copy> getAllCopiesWithOrdersCountByBookId(Integer bookId) {
-        String line = "select count(o.book), c from Copy c left join c.orders o where c.book.id = :book_id group by c.id";
+        String line = "select count(o.book), c from Copy c left join c.orders o where c.book.id = :bookId group by c.id";
         Query query = this.sessionFactory.getCurrentSession().createQuery(line);
-        query.setParameter("book_id", bookId);
+        query.setParameter("bookId", bookId);
         Iterator iter = query.list().iterator();
         List<Copy> copies = new ArrayList<>();
         while (iter.hasNext()) {

@@ -46,9 +46,9 @@ public class UserDaoImpl implements UserDao {
     @SuppressWarnings("unchecked")
     @Override
     public User getUserByUsername(String userName) {
-        String line = "from User where userName = :user_name";
+        String line = "from User where userName = :userName";
         Query query = this.sessionFactory.getCurrentSession().createQuery(line);
-        query.setParameter("user_name", userName);
+        query.setParameter("userName", userName);
         List users = query.list();
 
         if (users.isEmpty()) {

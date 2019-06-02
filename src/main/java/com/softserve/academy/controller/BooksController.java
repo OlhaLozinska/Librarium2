@@ -93,9 +93,9 @@ public class BooksController {
 
     @RequestMapping(value = "/books/{id}", method = RequestMethod.POST)
     public String orderBook(ModelMap map, @PathVariable String id,
-                            @RequestParam("copy_id") String copyId,
-                            @RequestParam("reader_select") String readerId,
-                            @RequestParam(value = "book_id") String bookId) {
+                            @RequestParam("copyId") String copyId,
+                            @RequestParam("readerId") String readerId,
+                            @RequestParam(value = "bookId") String bookId) {
 
         HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
             .getRequest().getSession();

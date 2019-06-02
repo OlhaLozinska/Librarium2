@@ -6,6 +6,7 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Book;
@@ -30,9 +31,9 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Integer getOrdersCountByBookId(Integer bookId) {
-        String line = "select count(book) from Order where book.id = :book_id";
+        String line = "select count(book) from Order where book.id = :bookId";
         Query query = this.sessionFactory.getCurrentSession().createQuery(line);
-        query.setParameter("book_id", bookId);
+        query.setParameter("bookId", bookId);
         Long count = (Long) query.list().get(0);
         return count.intValue();
     }
@@ -65,6 +66,7 @@ public class OrderDaoImpl implements OrderDao {
 
         return true;
     }
+
     @Override
     public int getQuantityOfOrdersInAllPeriod() {
         String hql = "select id FROM Order";

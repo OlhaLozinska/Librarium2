@@ -50,7 +50,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> getOrderedListOfBooksInPeriod(Date startDate, Date endDate, boolean sortAsc) {
         String line = "select count(o.book), b from Order o left join o.book b " +
-            "where o.takeDate between :start_date and :end_date " +
+            "where o.takeDate between :startDate and :endDate " +
             "group by o.book.id order by count(o.book) ";
         if (sortAsc) {
             line += "asc";
@@ -58,8 +58,8 @@ public class BookDaoImpl implements BookDao {
             line += "desc";
         }
         Query query = this.sessionFactory.getCurrentSession().createQuery(line);
-        query.setParameter("start_date", startDate);
-        query.setParameter("end_date", endDate);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
 
         Iterator iter = query.list().iterator();
         List<Book> books = new ArrayList<>();
