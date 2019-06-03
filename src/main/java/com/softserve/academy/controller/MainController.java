@@ -18,6 +18,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ *
+ * Controller class, sets all routes for home page.
+ *
+ * @author Olha Lozinska
+ * @version 1.0
+ * @since 29.05.2019
+ *
+ */
 @Controller
 public class MainController {
 
@@ -28,6 +37,12 @@ public class MainController {
     @Autowired
     private OrderService orderService;
 
+    /**
+     * Configure attributes for GET request to home page.
+     *
+     * @param map Request parameters map
+     * @return view name.
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(ModelMap map) {
         map.addAttribute("BooksQuantityInIndependencePeriod",

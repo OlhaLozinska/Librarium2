@@ -79,6 +79,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     /**
      * Add resource path to registry.
      *
+     * @param registry ResourceHandlerRegistry
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -90,6 +91,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     /**
      * Add security interceptor path to registry.
      *
+     * @param registry InterceptorRegistry
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

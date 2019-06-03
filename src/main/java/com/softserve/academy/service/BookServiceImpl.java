@@ -96,6 +96,11 @@ public class BookServiceImpl implements BookService {
         return book;
     }
 
+    /**
+     * Sets path to static photos according to book id.
+     *
+     * @param books list of books to set image urls
+     */
     private void setBooksImageUrl(final List<Book> books) {
         if (books == null) {
             return;
@@ -105,6 +110,11 @@ public class BookServiceImpl implements BookService {
         }
     }
 
+    /**
+     * Calculates and sets books rating.
+     *
+     * @param books list of books to set image urls
+     */
     private void setBookRating(final List<Book> books) {
         if ((books == null) || (books.isEmpty())) {
             return;

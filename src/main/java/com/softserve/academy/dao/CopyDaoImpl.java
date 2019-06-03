@@ -29,16 +29,28 @@ import java.util.List;
  */
 @Repository
 public class CopyDaoImpl implements CopyDao {
-    /** SessionFactory objcet */
+    /** SessionFactory object */
     @Autowired
     private SessionFactory sessionFactory;
 
+    /**
+     * Finds copy by copy ID.
+     *
+     * @param id copy ID
+     * @return copy.
+     */
     @SuppressWarnings("unchecked")
     @Override
     public Copy getCopyById(Integer id) {
         return this.sessionFactory.getCurrentSession().get(Copy.class, id);
     }
 
+    /**
+     * Finds all copies with orders count by book ID.
+     *
+     * @param bookId book ID.
+     * @return list of matching copies.
+     */
     @SuppressWarnings("unchecked")
     @Override
     public List<Copy> getAllCopiesWithOrdersCountByBookId(Integer bookId) {
