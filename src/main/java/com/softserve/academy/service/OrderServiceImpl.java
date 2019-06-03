@@ -25,6 +25,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.Calendar;
 
+/**
+ * Order service implementation.
+ *
+ * @author Olha Lozinska
+ * @author Volodymyr Oseredchuk
+ * @version 1.0
+ * @since 23.05.2019
+ */
 @Service
 public class OrderServiceImpl implements OrderService {
     @Autowired
@@ -38,13 +46,26 @@ public class OrderServiceImpl implements OrderService {
 
     private static final Logger LOGGER = Logger.getLogger(OrderServiceImpl.class);
 
+    /**
+     * Returns quantity of orders in all period.
+     *
+     * @return quantity of orders.
+     */
     @Override
     @Transactional
     public int getQuantityOfOrdersInAllPeriod() {
         return orderDao.getQuantityOfOrdersInAllPeriod();
     }
 
-
+    /**
+     * Returns orders count by book ID.
+     *
+     * @param copyId   copy ID.
+     * @param readerId user ID.
+     * @param bookId   book ID.
+     * @param creator  user, which created the record.
+     * @return condition.
+     */
     @Override
     @Transactional
     public boolean orderCopy(String copyId, String readerId, String bookId, User creator)
