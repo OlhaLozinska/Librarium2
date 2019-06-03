@@ -6,6 +6,7 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Book;
