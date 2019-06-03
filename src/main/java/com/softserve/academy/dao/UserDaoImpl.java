@@ -93,8 +93,8 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public int getUserAverageTimeOfUsingLibrary() {
-        String hql = "select avg(((year(current_date)*365)+(month(current_date)*12)+day(current_date))" +
-            "-((year(createdAt)*365)+(month(createdAt)*12)+day(createdAt))) FROM User";
+        String hql = "select avg(((year(current_date)*365)+(month(current_date)*30)+day(current_date))" +
+            "-((year(createdAt)*365)+(month(createdAt)*30)+day(createdAt))) FROM User";
         List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
         return ((Double) results.get(0)).intValue();
     }
@@ -107,8 +107,8 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public int getUserAverageAgeByBookId(int bookId) {
-        String hql = "select (avg(((year(current_date)*365)+(month(current_date)*12)+day(current_date))" +
-            "-((year(U.birthdayDate)*365)+(month(U.birthdayDate)*12)+day(U.birthdayDate))))/365 " +
+        String hql = "select (avg(((year(current_date)*365)+(month(current_date)*30)+day(current_date))" +
+            "-((year(U.birthdayDate)*365)+(month(U.birthdayDate)*30)+day(U.birthdayDate))))/365 " +
             "from  Order As O left join User AS U On U.id = O.reader.id and O.book.id=:bookId";
 
         List results = this.sessionFactory.getCurrentSession().createQuery(hql).setParameter("bookId", bookId).list();
