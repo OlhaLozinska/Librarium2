@@ -6,6 +6,7 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.service;
 
 import com.softserve.academy.dao.CopyDao;
@@ -17,21 +18,33 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Copy service implementation.
+ *
+ * @author Volodymyr Oseredchuk
+ * @version 1.0
+ * @since 23.05.2019
+ */
 @Service
 public class CopyServiceImpl implements CopyService {
 
     @Autowired
     private CopyDao copyDao;
 
+    /**
+     * Returns all copies by book.
+     *
+     * @param book book.
+     * @return list of matching copies.
+     */
     @Override
     @Transactional
     public List<Copy> getAllCopiesByBook(Book book)
         throws IllegalArgumentException {
         if (book == null) {
             throw new IllegalArgumentException("Book is null");
-        } else if (book.getId() <= 0) {
-            throw new IllegalArgumentException("Book ID is not valid");
         }
+
         return copyDao.getAllCopiesWithOrdersCountByBookId(book.getId());
     }
 }

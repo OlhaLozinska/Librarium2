@@ -30,6 +30,13 @@ import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
+/**
+ * Controller class, sets all routes for book pages.
+ *
+ * @author Volodymyr Oseredchuk
+ * @version 1.0
+ * @since 29.05.2019
+ */
 @Controller
 public class BooksController {
     @Autowired
@@ -44,6 +51,12 @@ public class BooksController {
     private static final Logger LOGGER = Logger.getLogger(BooksController.class);
 
 
+    /**
+     * Configure attributes for GET request to books page.
+     *
+     * @param map Request parameters map
+     * @return view name.
+     */
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public String listBooks(ModelMap map) {
         map.addAttribute("endDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
@@ -51,6 +64,15 @@ public class BooksController {
         return "books";
     }
 
+    /**
+     * Configure attributes for POST request to books page.
+     *
+     * @param map            Request parameters map
+     * @param startDate      start date period for sorting
+     * @param endDate        end date period for sorting
+     * @param unpopularFirst order to sort
+     * @return view name.
+     */
     @RequestMapping(value = "/books", method = RequestMethod.POST)
     public String listOrderedBooks(ModelMap map, @RequestParam("startDate") String startDate,
                                    @RequestParam("endDate") String endDate,
@@ -69,6 +91,13 @@ public class BooksController {
         return "books";
     }
 
+    /**
+     * Configure attributes for GET request to book page.
+     *
+     * @param map Request parameters map
+     * @param id  book id
+     * @return view name.
+     */
     @RequestMapping(value = "/books/{id}", method = RequestMethod.GET)
     public String listBook(ModelMap map, @PathVariable String id) {
         try {
@@ -91,11 +120,21 @@ public class BooksController {
         return "book";
     }
 
+    /**
+     * Configure attributes for POST request to book page.
+     *
+     * @param map      Request parameters map
+     * @param id       book id
+     * @param copyId   copy id - what copy is ordered
+     * @param readerId reader id - who orders
+     * @param bookId   book id - what book is ordered
+     * @return view name.
+     */
     @RequestMapping(value = "/books/{id}", method = RequestMethod.POST)
     public String orderBook(ModelMap map, @PathVariable String id,
-                            @RequestParam("copy_id") String copyId,
-                            @RequestParam("reader_select") String readerId,
-                            @RequestParam(value = "book_id") String bookId) {
+                            @RequestParam("copyId") String copyId,
+                            @RequestParam("readerId") String readerId,
+                            @RequestParam(value = "bookId") String bookId) {
 
         HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
             .getRequest().getSession();

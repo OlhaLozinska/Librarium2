@@ -6,6 +6,7 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Copy;
@@ -19,24 +20,46 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Class which provide default implementation of CRUD operations.
+ *
+ * @author Olha Lozinska
+ * @author Volodymyr Oseredchuk
+ * @version 1.0
+ * @since 23.05.2019
+ */
 @Repository
 public class CopyDaoImpl implements CopyDao {
-
+    /**
+     * SessionFactory object
+     */
     @Autowired
     private SessionFactory sessionFactory;
 
+    /**
+     * Finds copy by copy ID.
+     *
+     * @param id copy ID
+     * @return copy.
+     */
     @SuppressWarnings("unchecked")
     @Override
     public Copy getCopyById(Integer id) {
         return this.sessionFactory.getCurrentSession().get(Copy.class, id);
     }
 
+    /**
+     * Finds all copies with orders count by book ID.
+     *
+     * @param bookId book ID.
+     * @return list of matching copies.
+     */
     @SuppressWarnings("unchecked")
     @Override
     public List<Copy> getAllCopiesWithOrdersCountByBookId(Integer bookId) {
-        String line = "select count(o.book), c from Copy c left join c.orders o where c.book.id = :book_id group by c.id";
+        String line = "select count(o.book), c from Copy c left join c.orders o where c.book.id = :bookId group by c.id";
         Query query = this.sessionFactory.getCurrentSession().createQuery(line);
-        query.setParameter("book_id", bookId);
+        query.setParameter("bookId", bookId);
         Iterator iter = query.list().iterator();
         List<Copy> copies = new ArrayList<>();
         while (iter.hasNext()) {

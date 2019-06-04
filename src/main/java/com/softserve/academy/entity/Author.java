@@ -6,12 +6,20 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.entity;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Entity class, represents library book's author.
+ *
+ * @author Olha Lozinska
+ * @version 2.0
+ * @since 23.05.2019
+ */
 @Entity
 @Table(name = "authors")
 public class Author {
@@ -37,6 +45,9 @@ public class Author {
     @ManyToMany(targetEntity = Book.class, mappedBy = "authors", fetch = FetchType.LAZY)
     private List<Book> books;
 
+    /**
+     * Default no-args constructor
+     */
     public Author() {
     }
 
@@ -88,6 +99,12 @@ public class Author {
         this.books = books;
     }
 
+    /**
+     * Checks two Author objects for equality.
+     *
+     * @param o author
+     * @return true or false.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -117,6 +134,11 @@ public class Author {
         return books != null ? books.equals(author.books) : author.books == null;
     }
 
+    /**
+     * Calculates hashCode for Author object.
+     *
+     * @return author's hashCode.
+     */
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
@@ -128,6 +150,11 @@ public class Author {
         return result;
     }
 
+    /**
+     * Forms string representation of Author object.
+     *
+     * @return string representation of Author object.
+     */
     @Override
     public String toString() {
         return "Author{" +

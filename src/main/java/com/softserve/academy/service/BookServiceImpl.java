@@ -6,6 +6,7 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.service;
 
 import com.softserve.academy.dao.BookDao;
@@ -21,6 +22,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * Book service implementation.
+ *
+ * @author Olha Lozinska
+ * @author Volodymyr Oseredchuk
+ * @version 1.0
+ * @since 23.05.2019
+ */
 @Service
 public class BookServiceImpl implements BookService {
     @Autowired
@@ -30,6 +39,11 @@ public class BookServiceImpl implements BookService {
 
     private static final Logger LOGGER = Logger.getLogger(BookServiceImpl.class);
 
+    /**
+     * Returns list of all books.
+     *
+     * @return list of all books.
+     */
     @Override
     @Transactional
     public List<Book> getAllBooks() {
@@ -39,13 +53,24 @@ public class BookServiceImpl implements BookService {
         return books;
     }
 
+    /**
+     * Returns average time of reading by book's ID.
+     *
+     * @param bookId book's ID
+     * @return number of days.
+     */
     @Override
     @Transactional
     public int getAverageTimeOfReadingByBookId(int bookId) {
         return bookDao.getAverageTimeOfReadingByBookId(bookId);
     }
 
-
+    /**
+     * Returns book by book's ID.
+     *
+     * @param id book's ID
+     * @return book.
+     */
     @Override
     @Transactional
     public Book getBookById(String id) throws IllegalArgumentException {
@@ -71,6 +96,11 @@ public class BookServiceImpl implements BookService {
         return book;
     }
 
+    /**
+     * Sets path to static photos according to book id.
+     *
+     * @param books list of books to set image urls
+     */
     private void setBooksImageUrl(final List<Book> books) {
         if (books == null) {
             return;
@@ -80,6 +110,11 @@ public class BookServiceImpl implements BookService {
         }
     }
 
+    /**
+     * Calculates and sets books rating.
+     *
+     * @param books list of books to set image urls
+     */
     private void setBookRating(final List<Book> books) {
         if ((books == null) || (books.isEmpty())) {
             return;
@@ -97,6 +132,14 @@ public class BookServiceImpl implements BookService {
         }
     }
 
+    /**
+     * Returns ordered list of books in a certain period of dates.
+     *
+     * @param startDate      date of start period.
+     * @param endDate        date of end period.
+     * @param unpopularFirst sort by raring.
+     * @return list of matching books.
+     */
     @Override
     @Transactional
     public List<Book> getOrderedBooksInPeriod(String startDate, String endDate, String unpopularFirst)
@@ -122,9 +165,15 @@ public class BookServiceImpl implements BookService {
         return orderedBooks;
     }
 
+    /**
+     * Returns number of all books, which are publishing in period of Independence.
+     *
+     * @return number of books.
+     */
     @Override
     @Transactional
     public int getCountBooksPublishingInPeriodOfIndependence() {
         return bookDao.getCountBooksPublishingInPeriodOfIndependence();
-    };
+    }
+
 }

@@ -6,11 +6,19 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.entity;
 
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * Entity class, represents library orders table.
+ *
+ * @author Volodymyr Oseredchuk
+ * @version 2.0
+ * @since 23.05.2019
+ */
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -51,6 +59,9 @@ public class Order {
     @Temporal(TemporalType.DATE)
     private Date deadlineDate;
 
+    /**
+     * Default no-args constructor
+     */
     public Order() {
     }
 
@@ -126,6 +137,12 @@ public class Order {
         this.deadlineDate = deadlineDate;
     }
 
+    /**
+     * Checks two Order objects for equality.
+     *
+     * @param o order
+     * @return true or false.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -164,6 +181,11 @@ public class Order {
         return deadlineDate != null ? deadlineDate.equals(order.deadlineDate) : order.deadlineDate == null;
     }
 
+    /**
+     * Calculates hashCode for Order object.
+     *
+     * @return order's hashCode.
+     */
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
@@ -178,6 +200,11 @@ public class Order {
         return result;
     }
 
+    /**
+     * Forms string representation of Order object.
+     *
+     * @return string representation of Order object.
+     */
     @Override
     public String toString() {
         return "Order{" +

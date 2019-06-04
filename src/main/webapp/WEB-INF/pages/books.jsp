@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" style="margin-bottom: 40px;">
         <c:forEach items="${books}" var="book">
             <div class = "col-md-3 d-flex" id="booksCards">
                 <div class="card flex-fill">

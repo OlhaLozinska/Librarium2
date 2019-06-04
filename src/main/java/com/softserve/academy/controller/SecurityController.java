@@ -14,7 +14,6 @@ import com.softserve.academy.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +22,13 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * Controller class, handles request for login and logout.
+ *
+ * @author Volodymyr Oseredchuk
+ * @version 1.0
+ * @since 31.05.2019
+ */
 @Controller
 public class SecurityController {
     @Autowired
@@ -30,6 +36,11 @@ public class SecurityController {
 
     private static final Logger LOGGER = Logger.getLogger(SecurityController.class);
 
+    /**
+     * Invalidates session for GET logout request.
+     *
+     * @return view name.
+     */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout() {
         ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
@@ -38,6 +49,13 @@ public class SecurityController {
         return "redirect:/";
     }
 
+    /**
+     * Sets user in session for GET login request.
+     *
+     * @param username user name for login
+     * @param password password for login
+     * @return view name.
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("uname") String username,
                         @RequestParam("pwd") String password) {

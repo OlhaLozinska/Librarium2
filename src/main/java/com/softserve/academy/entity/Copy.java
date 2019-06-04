@@ -6,12 +6,20 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.entity;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Entity class, represents library book's copy.
+ *
+ * @author Olha Lozinska
+ * @version 2.0
+ * @since 23.05.2019
+ */
 @Entity
 @Table(name = "copies")
 public class Copy {
@@ -47,6 +55,9 @@ public class Copy {
     @OneToMany(mappedBy = "copy", fetch = FetchType.LAZY)
     private List<Order> orders;
 
+    /**
+     * Default no-args constructor
+     */
     public Copy() {
     }
 
@@ -122,6 +133,12 @@ public class Copy {
         this.orders = orders;
     }
 
+    /**
+     * Checks two Copy objects for equality.
+     *
+     * @param o copy
+     * @return true or false.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -160,6 +177,11 @@ public class Copy {
         return orders != null ? orders.equals(copy.orders) : copy.orders == null;
     }
 
+    /**
+     * Calculates hashCode for Copy object.
+     *
+     * @return copy's hashCode.
+     */
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
@@ -174,6 +196,11 @@ public class Copy {
         return result;
     }
 
+    /**
+     * Forms string representation of Copy object.
+     *
+     * @return string representation of Copy object.
+     */
     @Override
     public String toString() {
         return "Copy{" +

@@ -18,13 +18,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.apache.log4j.Logger;
 
+/**
+ * Controller class, sets all routes for user pages.
+ *
+ * @author Andrii Dobrianskyi
+ * @version 1.0
+ * @since 29.05.2019
+ */
 @Controller
 public class UserController {
     @Autowired
     private UserService userService;
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
 
-
+    /**
+     * Configure attributes for GET request to user page.
+     *
+     * @param map Request parameters map
+     * @return view name.
+     */
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String listUser(ModelMap map) {
         try {
