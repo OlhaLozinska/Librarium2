@@ -59,7 +59,7 @@ public interface UserService {
      * @param author author.
      * @return number of years.
      */
-    int getUserAverageAgeByAuthor(Author author);
+    int getUserAverageAgeByAuthor(Author author) throws IllegalArgumentException;
 
     /**
      * Returns list of user average ages for certain authors.
@@ -67,7 +67,7 @@ public interface UserService {
      * @param authors list of authors.
      * @return list of average ages of users.
      */
-    List<Integer> getUsersAverageAgesForAuthors(List<Author> authors);
+    List<Integer> getUsersAverageAgesForAuthors(List<Author> authors) throws IllegalArgumentException;
 
     /**
      * Returns user statistic average age.

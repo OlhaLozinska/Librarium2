@@ -145,7 +145,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public int getUserAverageAgeByAuthor(Author author) {
+    public int getUserAverageAgeByAuthor(Author author) throws IllegalArgumentException {
+        if (author == null) {
+            throw new IllegalArgumentException("Author is null");
+        }
         return userDao.getUserAverageAgeByAuthor(author);
     }
 
