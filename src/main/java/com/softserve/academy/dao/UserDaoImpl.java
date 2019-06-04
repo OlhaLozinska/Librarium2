@@ -16,6 +16,10 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -91,12 +95,29 @@ public class UserDaoImpl implements UserDao {
      *
      * @return number of days.
      */
-    @Override
+    /*@Override
     public int getUserAverageTimeOfUsingLibrary() {
         String hql = "select avg(((year(current_date)*365)+(month(current_date)*30)+day(current_date))" +
             "-((year(createdAt)*365)+(month(createdAt)*30)+day(createdAt))) FROM User";
         List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
         return ((Double) results.get(0)).intValue();
+    }*/
+    @Override
+    public int getUserAverageTimeOfUsingLibrary() {
+        List results = this.sessionFactory.getCurrentSession().createQuery("from User").list();
+        if ((results == null) || (results.size() == 0)) {
+            return 0;
+        }
+        int daysCount = 0;
+        LocalDate currentDate = LocalDate.now();
+        LocalDate userCreatedAt;
+        User user;
+        for (Object elem : results) {
+            user = (User) elem;
+            userCreatedAt = Instant.ofEpochMilli(user.getCreatedAt().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+            daysCount += (Period.between(userCreatedAt, currentDate).getDays());
+        }
+        return daysCount / results.size();
     }
 
     /**
@@ -105,7 +126,7 @@ public class UserDaoImpl implements UserDao {
      * @param bookId book ID.
      * @return number of years.
      */
-    @Override
+    /*@Override
     public int getUserAverageAgeByBookId(int bookId) {
         String hql = "select (avg(((year(current_date)*365)+(month(current_date)*30)+day(current_date))" +
             "-((year(U.birthdayDate)*365)+(month(U.birthdayDate)*30)+day(U.birthdayDate))))/365 " +
@@ -114,6 +135,25 @@ public class UserDaoImpl implements UserDao {
         List results = this.sessionFactory.getCurrentSession().createQuery(hql).setParameter("bookId", bookId).list();
 
         return ((Double) results.get(0)).intValue();
+    }*/
+    @Override
+    public int getUserAverageAgeByBookId(int bookId) {
+        String hql = "select U from Order As O left join User AS U On U.id = O.reader.id and O.book.id=:bookId " +
+            "where U.birthdayDate is not null";
+        List results = this.sessionFactory.getCurrentSession().createQuery(hql).setParameter("bookId", bookId).list();
+        if ((results == null) || (results.size() == 0)) {
+            return 0;
+        }
+        int yearsCount = 0;
+        LocalDate currentDate = LocalDate.now();
+        LocalDate userBirthdayDate;
+        User user;
+        for (Object elem : results) {
+            user = (User) elem;
+            userBirthdayDate = Instant.ofEpochMilli(user.getBirthdayDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+            yearsCount += (Period.between(userBirthdayDate, currentDate).getYears());
+        }
+        return yearsCount / results.size();
     }
 
     /**
@@ -122,7 +162,7 @@ public class UserDaoImpl implements UserDao {
      * @param author author.
      * @return number of years.
      */
-    @Override
+    /*@Override
     public int getUserAverageAgeByAuthor(Author author) {
         String hql = "select u from Author a left join a.books b " +
             "inner join b.orders o left join o.reader u where a.id=:authorId";
@@ -136,5 +176,26 @@ public class UserDaoImpl implements UserDao {
             counter += (date.getYear() - user.getBirthdayDate().getYear());
         }
         return counter / results.size();
+    }*/
+    @Override
+    public int getUserAverageAgeByAuthor(Author author) {
+        String hql = "select u from Author a left join a.books b " +
+            "inner join b.orders o left join o.reader u where a.id=:authorId " +
+            "and u.birthdayDate is not null";
+        Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+        List results = query.setParameter("authorId", author.getId()).list();
+        if ((results == null) || (results.size() == 0)) {
+            return 0;
+        }
+        int yearsCount = 0;
+        LocalDate currentDate = LocalDate.now();
+        LocalDate userBirthdayDate;
+        User user;
+        for (Object elem : results) {
+            user = (User) elem;
+            userBirthdayDate = Instant.ofEpochMilli(user.getBirthdayDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+            yearsCount += (Period.between(userBirthdayDate, currentDate).getYears());
+        }
+        return yearsCount / results.size();
     }
 }
