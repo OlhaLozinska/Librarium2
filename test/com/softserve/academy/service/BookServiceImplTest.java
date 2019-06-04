@@ -1,7 +1,6 @@
 package com.softserve.academy.service;
 
 import com.softserve.academy.dao.BookDaoImpl;
-import com.softserve.academy.dao.OrderDao;
 import com.softserve.academy.dao.OrderDaoImpl;
 import com.softserve.academy.entity.Book;
 import org.junit.Test;
@@ -104,7 +103,8 @@ public class BookServiceImplTest {
      */
     @Test
     public void getAverageTimeOfReadingByBookId() {
-        int result = bookService.getAverageTimeOfReadingByBookId(1);
+        bookService.getAverageTimeOfReadingByBookId(1);
+
         verify(bookDao, times(1)).getAverageTimeOfReadingByBookId(1);
     }
 
@@ -219,7 +219,8 @@ public class BookServiceImplTest {
      */
     @Test
     public void getCountBooksPublishingInPeriodOfIndependence() {
-        int result = bookService.getCountBooksPublishingInPeriodOfIndependence();
+        bookService.getCountBooksPublishingInPeriodOfIndependence();
+
         verify(bookDao, times(1))
             .getCountBooksPublishingInPeriodOfIndependence();
     }

@@ -6,6 +6,7 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Copy;
@@ -29,7 +30,9 @@ import java.util.List;
  */
 @Repository
 public class CopyDaoImpl implements CopyDao {
-    /** SessionFactory object */
+    /**
+     * SessionFactory object
+     */
     @Autowired
     private SessionFactory sessionFactory;
 

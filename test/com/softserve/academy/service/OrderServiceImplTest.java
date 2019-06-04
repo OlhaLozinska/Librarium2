@@ -77,17 +77,6 @@ public class OrderServiceImplTest {
         orderService.orderCopy("copyId", "readerID", "bookId", user);
     }
 
-    /**
-     * Test for @link orderService @method orderCopy() when ID are not valid (<0)
-     * Expected result: IllegalArgumentException to be throw
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void orderCopyByNegativeId() {
-        User user = new User();
-        user.setUserType(UserType.LIBRARIAN);
-
-        orderService.orderCopy("-1", "3", "-6", user);
-    }
 
     /**
      * Test for @link orderService @method orderCopy() with right values
@@ -109,8 +98,6 @@ public class OrderServiceImplTest {
         when(userDao.getUserById(any())).thenReturn(testReader);
         when(copyDao.getCopyById(any())).thenReturn(testCopy);
         when(bookDao.getBookById(any())).thenReturn(testBook);
-
-        when(orderDao.orderCopy(any(), any(), any(), any(), any())).thenReturn(true);
 
         orderService.orderCopy("1", "1", "1", user);
 

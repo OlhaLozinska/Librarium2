@@ -6,6 +6,7 @@
  * This software is the confidential and proprietary information of Softserve.
  *
  */
+
 package com.softserve.academy.entity;
 
 import java.util.Date;
@@ -14,13 +15,11 @@ import java.util.List;
 import javax.persistence.*;
 
 /**
- *
  * Entity class, represents library book.
  *
  * @author Volodymyr Oseredchuk
  * @version 2.0
  * @since 23.05.2019
- *
  */
 @Entity
 @Table(name = "books")

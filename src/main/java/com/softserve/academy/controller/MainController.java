@@ -19,13 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
- *
  * Controller class, sets all routes for home page.
  *
  * @author Olha Lozinska
  * @version 1.0
  * @since 29.05.2019
- *
  */
 @Controller
 public class MainController {

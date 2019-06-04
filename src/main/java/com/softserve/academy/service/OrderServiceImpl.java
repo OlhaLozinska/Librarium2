@@ -90,9 +90,6 @@ public class OrderServiceImpl implements OrderService {
             int copy_id = Integer.parseInt(copyId);
             int reader_id = Integer.parseInt(readerId);
             int book_id = Integer.parseInt(bookId);
-            if (copy_id <= 0 || reader_id <= 0 || book_id <= 0) {
-                throw new IllegalArgumentException("Id is not valid");
-            }
 
             reader = userDao.getUserById(reader_id);
             book = bookDao.getBookById(book_id);

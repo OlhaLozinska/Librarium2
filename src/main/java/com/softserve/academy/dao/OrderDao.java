@@ -56,5 +56,5 @@ public interface OrderDao {
      * @param deadlineDate the end date for the expected return of the  book.
      * @return condition.
      */
-    boolean orderCopy(User creator, User reader, Book book, Copy copy, Date deadlineDate);
+    void orderCopy(User creator, User reader, Book book, Copy copy, Date deadlineDate);
 }

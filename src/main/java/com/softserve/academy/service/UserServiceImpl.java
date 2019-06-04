@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User getUserById(Integer id) {
-        if ((id == null) || (id <= 0)) {
+        if (id == null) {
             throw new IllegalArgumentException("User ID is not valid");
         }
         return userDao.getUserById(id);
@@ -113,9 +113,9 @@ public class UserServiceImpl implements UserService {
         }
         if (user.getPassword().equals(password)) {
             return user;
-        } else {
-            throw new IllegalArgumentException("Password is not valid");
         }
+
+        throw new IllegalArgumentException("Password is not valid");
     }
 
     /**

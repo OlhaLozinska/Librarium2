@@ -43,9 +43,8 @@ public class CopyServiceImpl implements CopyService {
         throws IllegalArgumentException {
         if (book == null) {
             throw new IllegalArgumentException("Book is null");
-        } else if (book.getId() <= 0) {
-            throw new IllegalArgumentException("Book ID is not valid");
         }
+
         return copyDao.getAllCopiesWithOrdersCountByBookId(book.getId());
     }
 }

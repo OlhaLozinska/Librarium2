@@ -7,22 +7,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
  * Interceptor class, handles security for request.
  *
  * @author Volodymyr Oseredchuk
  * @version 1.0
  * @since 02.06.2019
- *
  */
 public class SecurityInterceptor extends HandlerInterceptorAdapter {
 
     /**
      * Check authentication for request.
      *
-     * @param request HttpServletRequest
+     * @param request  HttpServletRequest
      * @param response HttpServletResponse
-     * @param handler interceptor handler
+     * @param handler  interceptor handler
      * @return continue handling request or not.
      */
     @Override

@@ -12,13 +12,11 @@ package com.softserve.academy.config;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
- *
  * Config class, loads all application configurations.
  *
  * @author Volodymyr Oseredchuk
  * @version 1.0
  * @since 29.05.2019
- *
  */
 public class AppInitializer extends
     AbstractAnnotationConfigDispatcherServletInitializer {

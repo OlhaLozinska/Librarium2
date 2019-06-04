@@ -19,13 +19,11 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- *
  * Config class, sets all Hibernate configurations.
  *
  * @author Volodymyr Oseredchuk
  * @version 1.0
  * @since 29.05.2019
- *
  */
 @Configuration
 @EnableTransactionManagement

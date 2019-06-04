@@ -77,7 +77,7 @@ public class OrderDaoImpl implements OrderDao {
      * @return condition.
      */
     @Override
-    public boolean orderCopy(User creator, User reader, Book book, Copy copy, Date deadlineDate) {
+    public void orderCopy(User creator, User reader, Book book, Copy copy, Date deadlineDate) {
         Session session = this.sessionFactory.getCurrentSession();
 
         Date nowDate = new Date();
@@ -94,8 +94,6 @@ public class OrderDaoImpl implements OrderDao {
 
         copy.setAvailable(false);
         session.update(copy);
-
-        return true;
     }
 
     /**
