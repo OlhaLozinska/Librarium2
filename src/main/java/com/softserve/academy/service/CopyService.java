@@ -11,6 +11,7 @@ package com.softserve.academy.service;
 
 import com.softserve.academy.entity.Book;
 import com.softserve.academy.entity.Copy;
+import com.softserve.academy.entity.User;
 
 import java.util.List;
 
@@ -29,4 +30,7 @@ public interface CopyService {
      * @return list of matching copies.
      */
     List<Copy> getAllCopiesByBook(Book book) throws IllegalArgumentException;
+    List<Copy> getAllCopiesByUser(User user) throws IllegalArgumentException;
+
+    boolean returnCopy(String copyId, boolean toAvailable, String user_Id) throws IllegalArgumentException;
 }

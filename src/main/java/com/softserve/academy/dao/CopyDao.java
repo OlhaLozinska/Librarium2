@@ -10,6 +10,7 @@
 package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Copy;
+import com.softserve.academy.entity.User;
 
 import java.util.List;
 
@@ -37,4 +38,6 @@ public interface CopyDao {
      * @return list of matching copies.
      */
     List<Copy> getAllCopiesWithOrdersCountByBookId(Integer bookId);
+    List<Copy> getAllCopiesWithOrdersCountByUserId(Integer userId);
+    boolean changeCopyAvailability(Copy copyId, boolean toAvailable, User reader);
 }
