@@ -41,6 +41,8 @@ public class BookDaoImpl implements BookDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    private final static Integer INDEPENDENCE_YEAR = 1991;
+
     /**
      * Finds book by book's ID.
      *
@@ -114,8 +116,9 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public int getCountBooksPublishingInPeriodOfIndependence() {
-        String hql = "select distinct book.id FROM Copy WHERE publicationYear >1991";
-        List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
+        String hql = "select distinct book.id FROM Copy WHERE publicationYear > :independenceYear";
+        List results = this.sessionFactory.getCurrentSession().createQuery(hql)
+            .setParameter("independenceYear", INDEPENDENCE_YEAR).list();
         return results.size();
     }
 
