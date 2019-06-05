@@ -1,3 +1,5 @@
+
+
 package com.softserve.academy.service;
 
 import com.softserve.academy.dao.UserDaoImpl;
@@ -50,11 +52,11 @@ public class UserServiceImplTest {
      * Expected result is:
      * method getUserById() invoked once
      */
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void getUserById() {
-        userService.getUserById(1);
+        userService.getUserById(String.valueOf(1));
         verify(userDao, times(1))
-            .getUserById(1);
+            .getUserById(Integer.valueOf(String.valueOf(1)));
     }
 
     /**
@@ -67,6 +69,11 @@ public class UserServiceImplTest {
         userService.getUserStatisticAverageAge();
         verify(userDao, times(1))
             .getUserStatisticAverageAge();
+    }
+    @Test
+   public void getAllDebtors(){
+        userService.getAllDebtors();
+        verify(userDao, times(1)).getAllDebtors();
     }
 
     /**

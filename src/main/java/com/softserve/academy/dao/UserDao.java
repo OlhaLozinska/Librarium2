@@ -77,4 +77,9 @@ public interface UserDao {
     int getUserAverageAgeByAuthor(Author author);
 
 
+    List<User> getAllDebtors();
+
+    boolean userSave(User user);
+
+    int getDaysOfUsingLibraryByUser(User user);
 }

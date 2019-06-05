@@ -10,6 +10,9 @@
 package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Copy;
+import com.softserve.academy.entity.User;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,8 +47,15 @@ public class CopyDaoImpl implements CopyDao {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public Copy getCopyById(Integer id) {
-        return this.sessionFactory.getCurrentSession().get(Copy.class, id);
+    public Copy getCopyById(Integer id)
+    {
+        Session session; // = this.sessionFactory.getSessionFactory().openSession();
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        return session.get(Copy.class, id);
     }
 
     /**
@@ -69,5 +79,41 @@ public class CopyDaoImpl implements CopyDao {
             copies.add(copy);
         }
         return copies;
+    }
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Copy> getAllCopiesWithOrdersCountByUserId(Integer userId) {
+        Session session = this.sessionFactory.getSessionFactory().openSession();
+        String line = "select count(o.book), c from Copy c left join c.orders o left join o.reader as u where u.id = :users_id group by c.id";
+        Query query = session.createQuery(line);
+        query.setParameter("users_id", userId);
+        Iterator iter = query.list().iterator();
+        List<Copy> copies = new ArrayList<>();
+        while (iter.hasNext()) {
+            Object[] tuple = (Object[]) iter.next();
+            Copy copy = (Copy) tuple[1];
+            copy.setOrdersQuantity(((Long) tuple[0]).intValue());
+            copies.add(copy);
+        }
+        return copies;
+    }
+
+    @Override
+    public boolean changeCopyAvailability(Copy copyId, boolean toAvailable, User reader) {
+       // Session session = this.sessionFactory.getSessionFactory().openSession();
+       // session.beginTransaction();
+//        copyId.setAvailable(true);
+  //      session.update(copyId);
+        //System.out.println(copyId.getId());
+        //session.getTransaction().commit();
+      //  session.clear();
+        Session session = this.sessionFactory.getSessionFactory().openSession();
+        session.beginTransaction();
+        Copy em = (Copy) session.load(Copy.class, copyId.getId());
+        em.setAvailable(true);
+        session.getTransaction().commit();
+        session.close();
+
+        return true;
     }
 }

@@ -52,11 +52,24 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public User getUserById(Integer id) {
-        if (id == null) {
-            throw new IllegalArgumentException("User ID is not valid");
+    public User getUserById(String id) throws IllegalArgumentException {
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("User ID isn`t valid");
         }
-        return userDao.getUserById(id);
+
+        int userId;
+        try {
+            userId = Integer.parseInt(id);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("User ID isn`t valid");
+        }
+        User user = userDao.getUserById(userId);
+        if (user == null) {
+            throw new IllegalArgumentException("User with that id isn`t found");
+        }
+
+
+        return user;
     }
 
     /**
@@ -151,5 +164,21 @@ public class UserServiceImpl implements UserService {
         }
         return userDao.getUserAverageAgeByAuthor(author);
     }
+    @Override
+    @Transactional
+    public List<User> getAllDebtors() {
+        return userDao.getAllDebtors();
+    }
+    @Override
+    @Transactional
+    public boolean saveUser(User user) {
+        return userDao.userSave(user);
+    }
 
+    @Override
+    @Transactional
+    public int getDaysOfUsingLibraryByUser(User user) {
+
+        return userDao.getDaysOfUsingLibraryByUser(user);
+    }
 }
