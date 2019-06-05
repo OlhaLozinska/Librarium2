@@ -78,7 +78,7 @@
                         <strong>Average reader age for </strong>
                         <em><c:out value="${author.firstName} ${author.lastName}"/></em>
                         <strong> books: </strong>
-                        <c:out value="${averageUserAgesForAuthors[status.index]}"/>
+                        <c:out value="${averageUserAgesForAuthors[status.index]}"/> years
                     </p>
                 </c:forEach>
 

@@ -36,7 +36,7 @@ public interface UserService {
      * @param id user ID.
      * @return user.
      */
-    User getUserById(Integer id) throws IllegalArgumentException;
+    User getUserById(String id) throws IllegalArgumentException;
 
     /**
      * Returns user average time of using library.
@@ -84,4 +84,10 @@ public interface UserService {
      * @return registered user.
      */
     User getRegisteredUser(String username, String password) throws IllegalArgumentException;
+
+    List<User> getAllDebtors();
+
+    boolean saveUser(User user);
+
+    int getDaysOfUsingLibraryByUser (User user);
 }

@@ -10,11 +10,16 @@
 package com.softserve.academy.dao;
 
 import com.softserve.academy.entity.Book;
+import com.softserve.academy.entity.Order;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -35,6 +40,8 @@ public class BookDaoImpl implements BookDao {
      */
     @Autowired
     private SessionFactory sessionFactory;
+
+    private final static Integer INDEPENDENCE_YEAR = 1991;
 
     /**
      * Finds book by book's ID.
@@ -109,8 +116,9 @@ public class BookDaoImpl implements BookDao {
      */
     @Override
     public int getCountBooksPublishingInPeriodOfIndependence() {
-        String hql = "select distinct book.id FROM Copy WHERE publicationYear >1991";
-        List results = this.sessionFactory.getCurrentSession().createQuery(hql).list();
+        String hql = "select distinct book.id FROM Copy WHERE publicationYear > :independenceYear";
+        List results = this.sessionFactory.getCurrentSession().createQuery(hql)
+            .setParameter("independenceYear", INDEPENDENCE_YEAR).list();
         return results.size();
     }
 
@@ -120,11 +128,29 @@ public class BookDaoImpl implements BookDao {
      * @param bookId book's ID
      * @return number of days.
      */
-    @Override
+    /*@Override
     public int getAverageTimeOfReadingByBookId(int bookId) {
         String hql = "select avg(((year(returnDate)*365)+(month(returnDate)*12)+day(returnDate))" +
             "-((year(takeDate)*365)+(month(takeDate)*12)+day(takeDate))) from Order where id=:bookId";
         List results = this.sessionFactory.getCurrentSession().createQuery(hql).setParameter("bookId", bookId).list();
         return ((Double) results.get(0)).intValue();
+    }*/
+    @Override
+    public int getAverageTimeOfReadingByBookId(int bookId) {
+        String hql = "from Order where book.id=:bookId and returnDate is not null";
+        List results = this.sessionFactory.getCurrentSession().createQuery(hql).setParameter("bookId", bookId).list();
+        if ((results == null) || (results.size() == 0)) {
+            return 0;
+        }
+        int daysCount = 0;
+        LocalDate returnDate, takeDate;
+        Order order;
+        for (Object elem : results) {
+            order = (Order) elem;
+            returnDate = Instant.ofEpochMilli(order.getReturnDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+            takeDate = Instant.ofEpochMilli(order.getTakeDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+            daysCount += (Period.between(takeDate, returnDate).getDays());
+        }
+        return daysCount / results.size();
     }
 }
